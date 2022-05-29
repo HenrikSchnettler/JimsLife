@@ -7,12 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5C0190262B002300942C48 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5C018F262B002300942C48 /* ColorExtension.swift */; };
+		2B679906265BDE5300E660A5 /* Supplements.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679904265BDE5300E660A5 /* Supplements.xcdatamodeld */; };
+		2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679907265BE3BC00E660A5 /* Config.xcdatamodeld */; };
+		2B73B3DC26262602009FC899 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73B3DB26262602009FC899 /* UITabBarController.swift */; };
+		2B88A0FA262B361D003B2658 /* Supplements.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B88A0F9262B361D003B2658 /* Supplements.json */; };
+		2B88A100262B3A8E003B2658 /* Supplements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88A0FF262B3A8E003B2658 /* Supplements.swift */; };
+		2B88A105262B3CA0003B2658 /* DataDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88A104262B3CA0003B2658 /* DataDecoder.swift */; };
 		2BAA6F3C261E252F00D42310 /* JimsLifeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F3B261E252F00D42310 /* JimsLifeApp.swift */; };
-		2BAA6F3E261E252F00D42310 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F3D261E252F00D42310 /* ContentView.swift */; };
+		2BAA6F3E261E252F00D42310 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F3D261E252F00D42310 /* MainView.swift */; };
 		2BAA6F40261E253000D42310 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BAA6F3F261E253000D42310 /* Assets.xcassets */; };
 		2BAA6F43261E253000D42310 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BAA6F42261E253000D42310 /* Preview Assets.xcassets */; };
 		2BAA6F4E261E253000D42310 /* JimsLifeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F4D261E253000D42310 /* JimsLifeTests.swift */; };
 		2BAA6F59261E253000D42310 /* JimsLifeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F58261E253000D42310 /* JimsLifeUITests.swift */; };
+		2BAA6F72261E3A0B00D42310 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F71261E3A0B00D42310 /* HomeView.swift */; };
+		2BAA6F7A261E3E5E00D42310 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F79261E3E5E00D42310 /* ProgressView.swift */; };
+		2BDE501E2843FFCC00892668 /* Settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE501D2843FFCC00892668 /* Settings.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +43,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B5C018F262B002300942C48 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		2B679905265BDE5300E660A5 /* Supplements.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Supplements.xcdatamodel; sourceTree = "<group>"; };
+		2B679908265BE3BC00E660A5 /* Config.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Config.xcdatamodel; sourceTree = "<group>"; };
+		2B73B3DB26262602009FC899 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
+		2B88A0F9262B361D003B2658 /* Supplements.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Supplements.json; sourceTree = "<group>"; };
+		2B88A0FF262B3A8E003B2658 /* Supplements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supplements.swift; sourceTree = "<group>"; };
+		2B88A104262B3CA0003B2658 /* DataDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoder.swift; sourceTree = "<group>"; };
 		2BAA6F38261E252F00D42310 /* JimsLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimsLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAA6F3B261E252F00D42310 /* JimsLifeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JimsLifeApp.swift; sourceTree = "<group>"; };
-		2BAA6F3D261E252F00D42310 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2BAA6F3D261E252F00D42310 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2BAA6F3F261E253000D42310 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BAA6F42261E253000D42310 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2BAA6F44261E253000D42310 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +62,9 @@
 		2BAA6F54261E253000D42310 /* JimsLifeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JimsLifeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAA6F58261E253000D42310 /* JimsLifeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JimsLifeUITests.swift; sourceTree = "<group>"; };
 		2BAA6F5A261E253000D42310 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BAA6F71261E3A0B00D42310 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2BAA6F79261E3E5E00D42310 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		2BDE501D2843FFCC00892668 /* Settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Settings.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +92,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B5C018E262B000300942C48 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B5C018F262B002300942C48 /* ColorExtension.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2B88A0ED262B3418003B2658 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				2B88A0F9262B361D003B2658 /* Supplements.json */,
+				2BDE501D2843FFCC00892668 /* Settings.json */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		2B88A0FE262B3A5E003B2658 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2B88A0FF262B3A8E003B2658 /* Supplements.swift */,
+				2B679904265BDE5300E660A5 /* Supplements.xcdatamodeld */,
+				2B679907265BE3BC00E660A5 /* Config.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		2BAA6F2F261E252F00D42310 = {
 			isa = PBXGroup;
 			children = (
@@ -95,11 +142,17 @@
 		2BAA6F3A261E252F00D42310 /* JimsLife */ = {
 			isa = PBXGroup;
 			children = (
+				2B88A0FE262B3A5E003B2658 /* Models */,
+				2B88A0ED262B3418003B2658 /* Stores */,
+				2B5C018E262B000300942C48 /* Resources */,
+				2BAA6F6D261E395500D42310 /* Views */,
+				2BAA6F69261E26DD00D42310 /* Controllers */,
 				2BAA6F3B261E252F00D42310 /* JimsLifeApp.swift */,
-				2BAA6F3D261E252F00D42310 /* ContentView.swift */,
+				2BAA6F3D261E252F00D42310 /* MainView.swift */,
 				2BAA6F3F261E253000D42310 /* Assets.xcassets */,
 				2BAA6F44261E253000D42310 /* Info.plist */,
 				2BAA6F41261E253000D42310 /* Preview Content */,
+				2B88A104262B3CA0003B2658 /* DataDecoder.swift */,
 			);
 			path = JimsLife;
 			sourceTree = "<group>";
@@ -128,6 +181,23 @@
 				2BAA6F5A261E253000D42310 /* Info.plist */,
 			);
 			path = JimsLifeUITests;
+			sourceTree = "<group>";
+		};
+		2BAA6F69261E26DD00D42310 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B73B3DB26262602009FC899 /* UITabBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2BAA6F6D261E395500D42310 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2BAA6F71261E3A0B00D42310 /* HomeView.swift */,
+				2BAA6F79261E3E5E00D42310 /* ProgressView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +303,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B88A0FA262B361D003B2658 /* Supplements.json in Resources */,
 				2BAA6F43261E253000D42310 /* Preview Assets.xcassets in Resources */,
+				2BDE501E2843FFCC00892668 /* Settings.json in Resources */,
 				2BAA6F40261E253000D42310 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,8 +331,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BAA6F3E261E252F00D42310 /* ContentView.swift in Sources */,
+				2BAA6F72261E3A0B00D42310 /* HomeView.swift in Sources */,
+				2BAA6F7A261E3E5E00D42310 /* ProgressView.swift in Sources */,
+				2B88A100262B3A8E003B2658 /* Supplements.swift in Sources */,
+				2BAA6F3E261E252F00D42310 /* MainView.swift in Sources */,
+				2B88A105262B3CA0003B2658 /* DataDecoder.swift in Sources */,
+				2B5C0190262B002300942C48 /* ColorExtension.swift in Sources */,
+				2B73B3DC26262602009FC899 /* UITabBarController.swift in Sources */,
+				2B679906265BDE5300E660A5 /* Supplements.xcdatamodeld in Sources */,
 				2BAA6F3C261E252F00D42310 /* JimsLifeApp.swift in Sources */,
+				2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +660,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2B679904265BDE5300E660A5 /* Supplements.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2B679905265BDE5300E660A5 /* Supplements.xcdatamodel */,
+			);
+			currentVersion = 2B679905265BDE5300E660A5 /* Supplements.xcdatamodel */;
+			path = Supplements.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		2B679907265BE3BC00E660A5 /* Config.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2B679908265BE3BC00E660A5 /* Config.xcdatamodel */,
+			);
+			currentVersion = 2B679908265BE3BC00E660A5 /* Config.xcdatamodel */;
+			path = Config.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2BAA6F30261E252F00D42310 /* Project object */;
 }
