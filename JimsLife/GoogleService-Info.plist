@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>885778798187-l7t2k7qb7j8hi76t28le4bipqeeckm03.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.885778798187-l7t2k7qb7j8hi76t28le4bipqeeckm03</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBMpW-YCi49jlCgZBIxWKpGmTt0XrlXhYA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>885778798187</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>dev.schnettler.JimsLife</string>
+	<key>PROJECT_ID</key>
+	<string>jims-life</string>
+	<key>STORAGE_BUCKET</key>
+	<string>jims-life.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:885778798187:ios:e871537f579962d2cac32e</string>
+</dict>
+</plist>

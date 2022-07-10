@@ -12,39 +12,110 @@ struct HomeView: View{
     @State var showComposeMessageView: Bool = false
     
     var body: some View {
-        NavigationView{
-            // Erster Tab (Todo View einbinden aus anderer Datei)
+        VStack{
+        // Erster Tab (Todo View einbinden aus anderer Datei)
             ZStack{
-                Color.themeBackground
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                //Color.themeBackground
+                    //.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 VStack(alignment: .leading)
                 {
+                    //Supplement Picker Row
                     HomeView_Item_Row(supplements: SupplementData)
+                    Divider()
+                    ScrollView{
+                        //StatsView
+                        VStack{
+                            HStack{
+                                NavigationLink(destination: SettingsView())
+                                {
+                                    Image(systemName: "sleep.circle")
+                                        .resizable()
+                                        .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                                        .padding()
+                                        .foregroundColor(.white)
+                                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                                        .progressViewStyle(StatsProgressStyle())
+                                        .foregroundColor(.red)
+                                        .padding()
+                                }
+                                
+                                NavigationLink(destination: SettingsView())
+                                {
+                                    Image(systemName: "sleep.circle")
+                                        .resizable()
+                                        .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                                        .padding()
+                                        .foregroundColor(.white)
+                                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                                        .progressViewStyle(StatsProgressStyle())
+                                        .foregroundColor(.red)
+                                        .padding()
+                                }
+                            }
+                            HStack{
+                                NavigationLink(destination: SettingsView())
+                                {
+                                    Image(systemName: "sleep.circle")
+                                        .resizable()
+                                        .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                                        .padding()
+                                        .foregroundColor(.white)
+                                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                                        .progressViewStyle(StatsProgressStyle())
+                                        .foregroundColor(.red)
+                                        .padding()
+                                }
+                                NavigationLink(destination: SettingsView())
+                                {
+                                    Image(systemName: "sleep.circle")
+                                        .resizable()
+                                        .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                                        .padding()
+                                        .foregroundColor(.white)
+                                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                                        .progressViewStyle(StatsProgressStyle())
+                                        .foregroundColor(.red)
+                                        .padding()
+                                }
+                            }
+                        }
+                        Divider()
+                        VStack(alignment: .leading){
+                            HStack{
+                                //Text("Heutiges Training:")
+                                //Text("Push & Beine")
+                            }
+                            Divider()
+                        }
+                        .padding()
+                        Spacer()
+                    }
                 }
-                .navigationTitle("Jim´s Life")
                 .listStyle(GroupedListStyle())
-                .navigationBarItems(trailing:
-                                        Button(action: {
-                                            showComposeMessageView.toggle()
-                                        }, label: {
-                                            Image(systemName: "person.circle.fill")
-                                                .resizable()
-                                                .foregroundColor(Color.themeForeground )
-                                                .frame(width: 42, height: 42, alignment: .center)
-                                                
-                                        })
-                )
+                        
             }
         }
-        .sheet(isPresented: $showComposeMessageView, content: {
-            ZStack {
-               
-               Text("Test")
-            }
-            .compositingGroup()
-            .opacity(0.5)
-        })
     }
+    
+}
+
+struct StatsProgressStyle: ProgressViewStyle{
+    func makeBody(configuration: Configuration) -> some View {
+        ZStack(alignment: .leading){
+            RoundedRectangle(cornerRadius: 14)
+                .frame(width: 90, height: 10)
+                .foregroundColor(.black)
+                .overlay(Color.white.opacity(0.2)).cornerRadius(14)
+            
+            RoundedRectangle(cornerRadius: 14)
+                .frame(width: CGFloat(configuration.fractionCompleted ?? 0) * 90, height: 10)
+                .foregroundColor(Color.themeAccent)
+        }
+       
+    }
+    
+    
+    
 }
 
 struct HomeView_Item_Row: View {
@@ -68,6 +139,26 @@ struct HomeView_Item_Row: View {
                                     .frame(width: 30, height: 30)
                             }
                         )
+                        .contextMenu{
+                            Text("Konsumierte Supplements")
+                                .foregroundColor(.red)
+                                .font(.headline)
+                            Divider()
+                            HStack{
+                                ForEach(0 ..< supplements.count){
+                                    number in
+                                        Button{
+                                            print("Test")
+                                        }label: {
+                                            Label(supplements[number].name, systemImage: "minus.circle")
+                                        }
+                                    
+                                }
+                            }
+                        }
+                        .onLongPressGesture {
+                            print("Test")
+                        }
                     
                     ForEach(0 ..< supplements.count){
                         number in
@@ -78,7 +169,6 @@ struct HomeView_Item_Row: View {
                 
             })
             .padding()
-            Spacer()
         }
 
     }
@@ -92,19 +182,35 @@ struct HomeView_Item: View {
         
         Capsule()
             .fill(Color.themeAccent)
-            .frame(minWidth: 125, maxWidth: 150, minHeight: 50, maxHeight: 50)
+            .frame(minWidth: 125, maxWidth: 200, minHeight: 50, maxHeight: 50)
             .overlay(
-                HStack{
-                    Image(systemName: supplement.icon)
-                        .resizable()
-                        .foregroundColor(Color.themeForeground )
-                        .frame(width: 40, height: 40)
-                    
-                    Text(supplement.name).bold().foregroundColor(.white)
+                VStack(alignment: .leading){
+                    HStack(){
+                        Capsule()
+                            .fill(Color.themeForeground)
+                            .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
+                            .overlay(
+                                Text(supplement.name.prefix(1))
+                                    .foregroundColor(Color.themeSecondary )
+                                    .frame(width: 40, height: 40)
+                                    
+                            )
+                        Text(supplement.name).bold().foregroundColor(.white)
+                    }
                 }
             )
-                    
-            
+                .contextMenu{
+                    Button{
+                        
+                    }label: {
+                        Label("Supplement genommen", systemImage: "checkmark.circle")
+                    }
+                    Button{
+                        
+                    }label: {
+                        Label("Aus meiner Liste entfernen", systemImage: "minus.circle")
+                    }
+                }
     }
 
 }

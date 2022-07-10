@@ -8,6 +8,7 @@
 import Foundation
 
 let SupplementData: [Supplement] = load(filename: "Supplements.json")
+let DoneSupplementData: [DoneSupplement] = load(filename: "DoneSupplements.json")
 
 func load<T:Decodable>( filename:String, as type:T.Type = T.self) -> T {
     let data: Data

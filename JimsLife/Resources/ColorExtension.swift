@@ -13,6 +13,7 @@ extension Color {
     static let themeSecondary = Color("SecondaryColor")
     static let themeTertiary = Color("TertiaryColor")
     static let themeTabview = Color("TabviewColor")
+    static let themeLabel = Color("Label")
 }
 
 extension UIColor {
