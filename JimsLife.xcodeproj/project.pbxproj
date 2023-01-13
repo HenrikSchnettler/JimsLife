@@ -24,7 +24,7 @@
 		2BAA6F72261E3A0B00D42310 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F71261E3A0B00D42310 /* HomeView.swift */; };
 		2BAA6F7A261E3E5E00D42310 /* ProgressionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F79261E3E5E00D42310 /* ProgressionView.swift */; };
 		2BF83E72297168BB00D84F95 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF83E71297168BB00D84F95 /* CloudKit.framework */; };
-		2BF83E7B2971C90B00D84F95 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF83E7A2971C90B00D84F95 /* Persistence.swift */; };
+		2BF83E7E2971CD5F00D84F95 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF83E7D2971CD5F00D84F95 /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,8 @@
 		2BAA6F71261E3A0B00D42310 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2BAA6F79261E3E5E00D42310 /* ProgressionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressionView.swift; sourceTree = "<group>"; };
 		2BF83E71297168BB00D84F95 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		2BF83E7A2971C90B00D84F95 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		2BF83E7C2971CCAA00D84F95 /* JimsLife.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JimsLife.entitlements; sourceTree = "<group>"; };
+		2BF83E7D2971CD5F00D84F95 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,13 +139,14 @@
 		2BAA6F3A261E252F00D42310 /* JimsLife */ = {
 			isa = PBXGroup;
 			children = (
+				2BF83E7C2971CCAA00D84F95 /* JimsLife.entitlements */,
 				2B398C7F28710080001693BA /* GoogleService-Info.plist */,
 				2B88A0FE262B3A5E003B2658 /* Models */,
 				2B5C018E262B000300942C48 /* Resources */,
 				2BAA6F6D261E395500D42310 /* Views */,
 				2BAA6F69261E26DD00D42310 /* Controllers */,
 				2BAA6F3B261E252F00D42310 /* JimsLifeApp.swift */,
-				2BF83E7A2971C90B00D84F95 /* Persistence.swift */,
+				2BF83E7D2971CD5F00D84F95 /* Persistence.swift */,
 				2BAA6F3D261E252F00D42310 /* MainView.swift */,
 				2B9A447428562FBC00B40E7F /* VisualEffectBlur.swift */,
 				2BAA6F3F261E253000D42310 /* Assets.xcassets */,
@@ -350,7 +352,7 @@
 				2B73B3DC26262602009FC899 /* UITabBarController.swift in Sources */,
 				2B679906265BDE5300E660A5 /* Supplements.xcdatamodeld in Sources */,
 				2B398C472870F031001693BA /* SettingsView.swift in Sources */,
-				2BF83E7B2971C90B00D84F95 /* Persistence.swift in Sources */,
+				2BF83E7E2971CD5F00D84F95 /* Persistence.swift in Sources */,
 				2BAA6F3C261E252F00D42310 /* JimsLifeApp.swift in Sources */,
 				2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */,
 			);
@@ -509,6 +511,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JimsLife/JimsLife.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"JimsLife/Preview Content\"";
 				DEVELOPMENT_TEAM = 5H73WJGK3G;
@@ -532,6 +535,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JimsLife/JimsLife.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"JimsLife/Preview Content\"";
 				DEVELOPMENT_TEAM = 5H73WJGK3G;
