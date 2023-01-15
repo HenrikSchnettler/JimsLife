@@ -8,9 +8,20 @@
 import SwiftUI
 
 enum Tabs: String{
-    case home = "Jim´s Life"
-    case social = "Social Club"
-    case progress = "Mein Fortschitt"
+    case home = "appname"
+    case social = "social"
+    case progress = "progress"
+    
+    var localizedString: String {
+        switch self {
+            case .home:
+                return NSLocalizedString("appname", comment: "")
+            case .social:
+                return NSLocalizedString("social", comment: "")
+            case .progress:
+                return NSLocalizedString("progress", comment: "")
+        }
+    }
 }
 
 
@@ -31,7 +42,7 @@ struct MainView: View {
                     .tag(Tabs.home)
                 
                     .tabItem {
-                        Text("Übersicht")
+                        Text("overview")
                         Image(systemName: "house")
                         Color.themeAccent
                     }
@@ -42,21 +53,23 @@ struct MainView: View {
                         
                     .tabItem {
                         Image(systemName: "person.3")
-                        Text("Soical")
+                        Text("social")
                     }
                     //Fortschritt Tab
                     ProgressionView()
                     .tag(Tabs.progress)
+                
                     .tabItem {
                         Image(systemName: "flame")
-                        Text("Mein Fortschritt")
+                        Text("progress")
+                        //Text(LocalizedStringKey("progress"))
                     }
             }
             .onAppear(){
                 
             }
             //.background(VisualEffectBlur())
-            .navigationTitle(selection.rawValue.capitalized)
+            .navigationTitle(selection.localizedString.capitalized)
             .navigationBarItems(trailing:
                                     ZStack{
                                         Button(action: {
@@ -115,10 +128,10 @@ struct MainView: View {
                             //Uebersicht Card
                             
                             List {
-                                Section(header: Text("Übersicht")){
+                                Section(header: Text("overview")){
                                     NavigationLink(destination: SettingsView())
                                     {
-                                        Text("Meine Supplements")
+                                        Text("my supplements")
                                     }
                                     Text("Test2")
                                 }
@@ -129,7 +142,7 @@ struct MainView: View {
                         }
                     }
                 }
-                .navigationTitle("Account")
+                .navigationTitle("account")
                 .compositingGroup()
                 .opacity(0.6)
             }

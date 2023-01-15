@@ -13,7 +13,6 @@
 		2B679906265BDE5300E660A5 /* Supplements.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679904265BDE5300E660A5 /* Supplements.xcdatamodeld */; };
 		2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679907265BE3BC00E660A5 /* Config.xcdatamodeld */; };
 		2B73B3DC26262602009FC899 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73B3DB26262602009FC899 /* UITabBarController.swift */; };
-		2B88A105262B3CA0003B2658 /* DataDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88A104262B3CA0003B2658 /* DataDecoder.swift */; };
 		2B9A447528562FBC00B40E7F /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9A447428562FBC00B40E7F /* VisualEffectBlur.swift */; };
 		2BAA6F3C261E252F00D42310 /* JimsLifeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F3B261E252F00D42310 /* JimsLifeApp.swift */; };
 		2BAA6F3E261E252F00D42310 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F3D261E252F00D42310 /* MainView.swift */; };
@@ -25,6 +24,7 @@
 		2BAA6F7A261E3E5E00D42310 /* ProgressionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F79261E3E5E00D42310 /* ProgressionView.swift */; };
 		2BF83E72297168BB00D84F95 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF83E71297168BB00D84F95 /* CloudKit.framework */; };
 		2BF83E7E2971CD5F00D84F95 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF83E7D2971CD5F00D84F95 /* Persistence.swift */; };
+		2BF83E8329744EB200D84F95 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BF83E8529744EB200D84F95 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,6 @@
 		2B679905265BDE5300E660A5 /* Supplements.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Supplements.xcdatamodel; sourceTree = "<group>"; };
 		2B679908265BE3BC00E660A5 /* Config.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Config.xcdatamodel; sourceTree = "<group>"; };
 		2B73B3DB26262602009FC899 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
-		2B88A104262B3CA0003B2658 /* DataDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoder.swift; sourceTree = "<group>"; };
 		2B9A447428562FBC00B40E7F /* VisualEffectBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
 		2BAA6F38261E252F00D42310 /* JimsLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimsLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAA6F3B261E252F00D42310 /* JimsLifeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JimsLifeApp.swift; sourceTree = "<group>"; };
@@ -70,6 +69,8 @@
 		2BF83E71297168BB00D84F95 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		2BF83E7C2971CCAA00D84F95 /* JimsLife.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JimsLife.entitlements; sourceTree = "<group>"; };
 		2BF83E7D2971CD5F00D84F95 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		2BF83E8429744EB200D84F95 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2BF83E8629744ECD00D84F95 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +119,7 @@
 		2BAA6F2F261E252F00D42310 = {
 			isa = PBXGroup;
 			children = (
+				2BF83E8529744EB200D84F95 /* Localizable.strings */,
 				2BAA6F3A261E252F00D42310 /* JimsLife */,
 				2BAA6F4C261E253000D42310 /* JimsLifeTests */,
 				2BAA6F57261E253000D42310 /* JimsLifeUITests */,
@@ -152,7 +154,6 @@
 				2BAA6F3F261E253000D42310 /* Assets.xcassets */,
 				2BAA6F44261E253000D42310 /* Info.plist */,
 				2BAA6F41261E253000D42310 /* Preview Content */,
-				2B88A104262B3CA0003B2658 /* DataDecoder.swift */,
 			);
 			path = JimsLife;
 			sourceTree = "<group>";
@@ -296,6 +297,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 2BAA6F2F261E252F00D42310;
 			packageReferences = (
@@ -317,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BAA6F43261E253000D42310 /* Preview Assets.xcassets in Resources */,
+				2BF83E8329744EB200D84F95 /* Localizable.strings in Resources */,
 				2BAA6F40261E253000D42310 /* Assets.xcassets in Resources */,
 				2B398C8028710080001693BA /* GoogleService-Info.plist in Resources */,
 			);
@@ -347,7 +350,6 @@
 				2BAA6F7A261E3E5E00D42310 /* ProgressionView.swift in Sources */,
 				2B9A447528562FBC00B40E7F /* VisualEffectBlur.swift in Sources */,
 				2BAA6F3E261E252F00D42310 /* MainView.swift in Sources */,
-				2B88A105262B3CA0003B2658 /* DataDecoder.swift in Sources */,
 				2B5C0190262B002300942C48 /* ColorExtension.swift in Sources */,
 				2B73B3DC26262602009FC899 /* UITabBarController.swift in Sources */,
 				2B679906265BDE5300E660A5 /* Supplements.xcdatamodeld in Sources */,
@@ -389,11 +391,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		2BF83E8529744EB200D84F95 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2BF83E8429744EB200D84F95 /* en */,
+				2BF83E8629744ECD00D84F95 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		2BAA6F5B261E253000D42310 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -455,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -13,12 +13,12 @@ struct SettingsView: View {
             HStack(alignment: .top){
                 VStack{
                     List{
-                        Section(header: Text("Aktive Supplements:")){
+                        Section(header: Text("active supplements:")){
                             Text("Aktives Supplement 1")
                             Text("Aktives Supplement 2")
                             
                         }
-                        Section(header: Text("Weitere mögliche Supplements:")){
+                        Section(header: Text("more possible supplements:")){
                             Text("Mögliches Supplement 1")
                             Text("Mögliches Supplement 2")
                         }
@@ -26,7 +26,7 @@ struct SettingsView: View {
                 }
             }
             Spacer()
-        }.navigationTitle("Meine Supplements")
+        }.navigationTitle("my supplements")
         
     }
 }

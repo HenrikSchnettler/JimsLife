@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  JimsLife
+
+  Created by Henrik Schnettler on 15.01.23.
+  
+*/
+
+//name of the app
+"appname" = "Jim´s Life";
+
+//Tabs
+"overview" = "overview";
+"social" = "social";
+"progress" = "progress";
+
+"my supplements" = "my supplements";
+"account" = "account";
+"consumed supplements" = "consumed supplements";
+"supplement taken" = "supplement taken";
+"more possible supplements:" = "more possible supplements:";
+"active supplements:" = "active supplements:";

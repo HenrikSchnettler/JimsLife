@@ -9,8 +9,6 @@ import SwiftUI
 /// Henrik: - HomeView
 struct HomeView: View{
     
-    @State var showComposeMessageView: Bool = false
-    
     var body: some View {
         VStack{
         // Erster Tab (Todo View einbinden aus anderer Datei)
@@ -20,7 +18,7 @@ struct HomeView: View{
                 VStack(alignment: .leading)
                 {
                     //Supplement Picker Row
-                    HomeView_Item_Row(supplements: SupplementData)
+                    HomeView_Item_Row()
                     Divider()
                     ScrollView{
                         //StatsView
@@ -119,8 +117,13 @@ struct StatsProgressStyle: ProgressViewStyle{
 }
 
 struct HomeView_Item_Row: View {
-    
-    var supplements: [Supplement]
+    @State var showComposeMessageView: Bool = false
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.id, ascending: true)],
+        animation: .default)
+    private var todoSupplementItems: FetchedResults<TodoSupplements>
     
     var body: some View {
         VStack(alignment: .leading){
@@ -140,31 +143,27 @@ struct HomeView_Item_Row: View {
                             }
                         )
                         .contextMenu{
-                            Text("Konsumierte Supplements")
+                            Text("consumed supplements")
                                 .foregroundColor(.red)
                                 .font(.headline)
                             Divider()
                             HStack{
-                                ForEach(0 ..< supplements.count){
-                                    number in
-                                        Button{
-                                            print("Test")
-                                        }label: {
-                                            Label(supplements[number].name, systemImage: "minus.circle")
-                                        }
-                                    
+                                ForEach(todoSupplementItems) { item in
+                                    Button{
+                                        print("Test")
+                                    }label: {
+                                        Label(item.name!, systemImage: "minus.circle")
+                                    }
                                 }
                             }
                         }
                         .onLongPressGesture {
                             print("Test")
                         }
-                    
-                    ForEach(0 ..< supplements.count){
-                        number in
-                        HomeView_Item(supplement: supplements[number])
+                    ForEach(todoSupplementItems) { item in
+                        
+                        HomeView_Item(supplement: item)
                     }
-                    
                 }
                 
             })
@@ -176,8 +175,7 @@ struct HomeView_Item_Row: View {
 
 struct HomeView_Item: View {
     
-    var supplement: Supplement
-    
+    var supplement: AnyObject
     var body: some View {
         
         Capsule()
@@ -203,12 +201,12 @@ struct HomeView_Item: View {
                     Button{
                         
                     }label: {
-                        Label("Supplement genommen", systemImage: "checkmark.circle")
+                        Label("supplement taken", systemImage: "checkmark.circle")
                     }
                     Button{
                         
                     }label: {
-                        Label("Aus meiner Liste entfernen", systemImage: "minus.circle")
+                        Label("remove from list", systemImage: "minus.circle")
                     }
                 }
     }
