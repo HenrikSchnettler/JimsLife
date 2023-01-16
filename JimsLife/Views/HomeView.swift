@@ -125,6 +125,11 @@ struct HomeView_Item_Row: View {
         animation: .default)
     private var todoSupplementItems: FetchedResults<TodoSupplements>
     
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \DoneSupplements.id, ascending: true)],
+        animation: .default)
+    private var doneSupplementItems: FetchedResults<DoneSupplements>
+    
     var body: some View {
         VStack(alignment: .leading){
             
@@ -148,7 +153,7 @@ struct HomeView_Item_Row: View {
                                 .font(.headline)
                             Divider()
                             HStack{
-                                ForEach(todoSupplementItems) { item in
+                                ForEach(doneSupplementItems) { item in
                                     Button{
                                         print("Test")
                                     }label: {
