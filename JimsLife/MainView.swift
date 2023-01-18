@@ -28,8 +28,7 @@ enum Tabs: String{
 struct MainView: View {
     
     init() {
-        //UINavigationBar.appearance().barTintColor = .clear
-       // UITabBar.appearance().barTintColor = UIColor.themeTabview
+        
     }
     @State var selection: Tabs = .home
     @State var showComposeMessageView: Bool = false
@@ -94,36 +93,37 @@ struct MainView: View {
         .sheet(isPresented: $showComposeMessageView, content: {
             NavigationView{
                 ZStack {
-                    //Color.themeBackground
-                        //.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    Color.themeLabel.opacity(0)
+                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                     HStack(){
                         VStack(){
                             //Account Card
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                    .fill(Color.themeLabel.opacity(0.1))
-                                    .frame(width: 360, height: 110, alignment: .leading)
-                                HStack{
-                                    ZStack{
-                                        Circle()
-                                            .foregroundColor(Color.themeLabel)
-                                            .frame(width: 70, height: 70, alignment: .center)
-                                            .padding()
-                                        Text("HS")
-                                            .foregroundColor(Color.themeBackground)
-                                            .frame(width: 70, height: 70, alignment: .center)
-                                    }
-                                    VStack{
-                                        Text("Henrik Schnettler")
-                                        Text("henrik@schnettler.dev")
-                                        Divider()
-                                            .frame(width: 225, height: 10, alignment: .leading)
-                                        Text("Mitgliedschaft: Premium")
-                                    }
-                    
+                            HStack{
+                                ZStack{
+                                    Circle()
+                                        .foregroundColor(Color.ContentOverAccent)
+                                        .frame(width: 70, height: 70, alignment: .center)
+                                        .padding()
+                                    Text("HS")
+                                        .foregroundColor(Color.InvertedContentOverAccent)
+                                        .frame(width: 70, height: 70, alignment: .center)
                                 }
+                                VStack{
+                                    Text("Henrik Schnettler")
+                                        .foregroundColor(Color.ContentOverAccent)
+                                    Text(verbatim:"henrik@schnettler.dev")
+                                        .foregroundColor(Color.ContentOverAccent)
+                                    Divider()
+                                        .frame(width: 225, height: 10, alignment: .leading)
+                                    Text("Mitgliedschaft: Premium")
+                                        .foregroundColor(Color.ContentOverAccent)
+                                }
+                
                             }
-                            .padding(.top, 10)
+                            .frame(height: 150)
+                            .background(Color.themeSecondary)
+                            .cornerRadius(20)
+                            .padding()
                             
                             //Uebersicht Card
                             
@@ -143,8 +143,9 @@ struct MainView: View {
                     }
                 }
                 .navigationTitle("account")
+                .navigationBarTitleDisplayMode(.inline)
                 .compositingGroup()
-                .opacity(0.6)
+                //.opacity(0.6)
             }
         })
             

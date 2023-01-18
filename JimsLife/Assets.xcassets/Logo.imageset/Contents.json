@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "qhd.png",
+      "filename" : "DALL·E 2023-01-16 18.12.42 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "DALL·E 2023-01-16 18.12.42.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "DALL·E 2023-01-16 18.12.42 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

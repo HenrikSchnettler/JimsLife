@@ -25,6 +25,7 @@
 		2BF83E72297168BB00D84F95 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF83E71297168BB00D84F95 /* CloudKit.framework */; };
 		2BF83E7E2971CD5F00D84F95 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF83E7D2971CD5F00D84F95 /* Persistence.swift */; };
 		2BF83E8329744EB200D84F95 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BF83E8529744EB200D84F95 /* Localizable.strings */; };
+		2BF83E8A2975FA5200D84F95 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BF83E892975FA5200D84F95 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		2BF83E7D2971CD5F00D84F95 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		2BF83E8429744EB200D84F95 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2BF83E8629744ECD00D84F95 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2BF83E892975FA5200D84F95 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		2BAA6F2F261E252F00D42310 = {
 			isa = PBXGroup;
 			children = (
+				2BF83E892975FA5200D84F95 /* Launch Screen.storyboard */,
 				2BF83E8529744EB200D84F95 /* Localizable.strings */,
 				2BAA6F3A261E252F00D42310 /* JimsLife */,
 				2BAA6F4C261E253000D42310 /* JimsLifeTests */,
@@ -321,6 +324,7 @@
 				2BAA6F43261E253000D42310 /* Preview Assets.xcassets in Resources */,
 				2BF83E8329744EB200D84F95 /* Localizable.strings in Resources */,
 				2BAA6F40261E253000D42310 /* Assets.xcassets in Resources */,
+				2BF83E8A2975FA5200D84F95 /* Launch Screen.storyboard in Resources */,
 				2B398C8028710080001693BA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,6 +531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = JimsLife/JimsLife.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"JimsLife/Preview Content\"";
@@ -551,6 +556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = JimsLife/JimsLife.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"JimsLife/Preview Content\"";

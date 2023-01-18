@@ -14,6 +14,8 @@ extension Color {
     static let themeTertiary = Color("TertiaryColor")
     static let themeTabview = Color("TabviewColor")
     static let themeLabel = Color("Label")
+    static let ContentOverAccent = Color("ContentOverAccentColor")
+    static let InvertedContentOverAccent = Color("InvertedContentOverAccentColor")
 }
 
 extension UIColor {

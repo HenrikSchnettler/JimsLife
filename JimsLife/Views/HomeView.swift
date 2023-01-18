@@ -19,74 +19,39 @@ struct HomeView: View{
                 {
                     //Supplement Picker Row
                     HomeView_Item_Row()
+                        //.padding(EdgeInsets())
                     Divider()
                     ScrollView{
-                        //StatsView
                         VStack{
                             HStack{
-                                NavigationLink(destination: SettingsView())
-                                {
-                                    Image(systemName: "sleep.circle")
-                                        .resizable()
-                                        .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                                        .padding()
-                                        .foregroundColor(.white)
-                                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
-                                        .progressViewStyle(StatsProgressStyle())
-                                        .foregroundColor(.red)
-                                        .padding()
+                                VStack{
+                                    Text("weight")
+                                        .textCase(.uppercase)
+                                        .foregroundColor(Color.themeTertiary)
+                                        .bold()
+                                    Text("72,5kg")
                                 }
-                                
-                                NavigationLink(destination: SettingsView())
-                                {
-                                    Image(systemName: "sleep.circle")
-                                        .resizable()
-                                        .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                                        .padding()
-                                        .foregroundColor(.white)
-                                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
-                                        .progressViewStyle(StatsProgressStyle())
-                                        .foregroundColor(.red)
-                                        .padding()
+                                Divider()
+                                VStack{
+                                    Text("body fat")
+                                        .textCase(.uppercase)
+                                        .foregroundColor(Color.secondary)
+                                        .bold()
+                                    Text("15%")
                                 }
+                                Divider()
+                                Spacer()
                             }
-                            HStack{
-                                NavigationLink(destination: SettingsView())
-                                {
-                                    Image(systemName: "sleep.circle")
-                                        .resizable()
-                                        .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                                        .padding()
-                                        .foregroundColor(.white)
-                                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
-                                        .progressViewStyle(StatsProgressStyle())
-                                        .foregroundColor(.red)
-                                        .padding()
-                                }
-                                NavigationLink(destination: SettingsView())
-                                {
-                                    Image(systemName: "sleep.circle")
-                                        .resizable()
-                                        .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                                        .padding()
-                                        .foregroundColor(.white)
-                                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
-                                        .progressViewStyle(StatsProgressStyle())
-                                        .foregroundColor(.red)
-                                        .padding()
-                                }
+                            .padding()
+                            //StatsView
+                            TabView{
+                                StatsView()
+                                StatsView()
                             }
+                            .tabViewStyle(.page(indexDisplayMode: .never))
+                            .frame(height: 160)
+                            Spacer()
                         }
-                        Divider()
-                        VStack(alignment: .leading){
-                            HStack{
-                                //Text("Heutiges Training:")
-                                //Text("Push & Beine")
-                            }
-                            Divider()
-                        }
-                        .padding()
-                        Spacer()
                     }
                 }
                 .listStyle(GroupedListStyle())
@@ -116,6 +81,73 @@ struct StatsProgressStyle: ProgressViewStyle{
     
 }
 
+struct StatsView: View {
+    
+    var body: some View {
+        HStack{
+            VStack{
+                HStack{
+                    NavigationLink(destination: SettingsView())
+                    {
+                        Image(systemName: "sleep.circle")
+                            .resizable()
+                            .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                            .padding()
+                            .foregroundColor(Color.themeForeground)
+                        ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                            .progressViewStyle(StatsProgressStyle())
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                    
+                    NavigationLink(destination: SettingsView())
+                    {
+                        Image(systemName: "sleep.circle")
+                            .resizable()
+                            .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                            .padding()
+                            .foregroundColor(Color.themeForeground)
+                        ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                            .progressViewStyle(StatsProgressStyle())
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                }
+                HStack{
+                    NavigationLink(destination: SettingsView())
+                    {
+                        Image(systemName: "sleep.circle")
+                            .resizable()
+                            .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                            .padding()
+                            .foregroundColor(Color.themeForeground)
+                        ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                            .progressViewStyle(StatsProgressStyle())
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                    NavigationLink(destination: SettingsView())
+                    {
+                        Image(systemName: "sleep.circle")
+                            .resizable()
+                            .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                            .padding()
+                            .foregroundColor(Color.themeForeground)
+                        ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                            .progressViewStyle(StatsProgressStyle())
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                }
+            }
+            .background(Color(uiColor: .secondarySystemBackground))
+            .cornerRadius(20)
+        }
+        .padding()
+    }
+
+}
+
 struct HomeView_Item_Row: View {
     @State var showComposeMessageView: Bool = false
     @Environment(\.managedObjectContext) private var viewContext
@@ -143,7 +175,7 @@ struct HomeView_Item_Row: View {
                             HStack{
                                 Image(systemName: "checkmark.circle.fill")
                                     .resizable()
-                                    .foregroundColor(Color.themeForeground )
+                                    .foregroundColor(Color.white)
                                     .frame(width: 30, height: 30)
                             }
                         )
@@ -169,12 +201,35 @@ struct HomeView_Item_Row: View {
                         
                         HomeView_Item(supplement: item)
                     }
+                    Button(action: addItem) {
+                        Label("add", systemImage: "plus")
+                    }
                 }
                 
             })
-            .padding()
+            
         }
 
+    }
+    
+    private func addItem() {
+        withAnimation {
+            let newItem = TodoSupplements(context: viewContext)
+            newItem.id = 0
+            newItem.categorie = "Test"
+            newItem.imageName = "power.circle"
+            newItem.itemDescription = "Test"
+            newItem.name = "Test"
+
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
     }
 }
 
@@ -189,16 +244,16 @@ struct HomeView_Item: View {
             .overlay(
                 VStack(alignment: .leading){
                     HStack(){
-                        Capsule()
-                            .fill(Color.themeForeground)
+                        Circle()
+                            .fill(Color.ContentOverAccent)
                             .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
                             .overlay(
                                 Text(supplement.name.prefix(1))
-                                    .foregroundColor(Color.themeSecondary )
+                                    .foregroundColor(Color.InvertedContentOverAccent )
                                     .frame(width: 40, height: 40)
                                     
                             )
-                        Text(supplement.name).bold().foregroundColor(.white)
+                        Text(supplement.name).bold().foregroundColor(Color.ContentOverAccent)
                     }
                 }
             )
