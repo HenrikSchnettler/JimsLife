@@ -84,66 +84,77 @@ struct StatsProgressStyle: ProgressViewStyle{
 struct StatsView: View {
     
     var body: some View {
-        HStack{
+       
             VStack{
                 HStack{
                     NavigationLink(destination: SettingsView())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
-                            .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                            .padding()
+                            .frame(minWidth: 25, maxWidth: 30, minHeight: 25, maxHeight: 30)
+                            .fixedSize(horizontal: true, vertical: true)
+                            .padding(.horizontal,10)
                             .foregroundColor(Color.themeForeground)
                         ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
                             .progressViewStyle(StatsProgressStyle())
                             .foregroundColor(.red)
-                            .padding()
+                            .padding(.horizontal,10)
                     }
                     
                     NavigationLink(destination: SettingsView())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
-                            .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                            .padding()
+                            .frame(minWidth: 25, maxWidth: 30, minHeight: 25, maxHeight: 30)
+                            .fixedSize(horizontal: true, vertical: true)
+                            .padding(.horizontal,10)
                             .foregroundColor(Color.themeForeground)
                         ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
                             .progressViewStyle(StatsProgressStyle())
                             .foregroundColor(.red)
-                            .padding()
+                            .padding(.horizontal,10)
                     }
+                    
+                    
                 }
+                .padding()
                 HStack{
                     NavigationLink(destination: SettingsView())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
-                            .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                            .padding()
+                            .frame(minWidth: 25, maxWidth: 30, minHeight: 25, maxHeight: 30)
+                            .fixedSize(horizontal: true, vertical: true)
+                            .padding(.horizontal,10)
                             .foregroundColor(Color.themeForeground)
                         ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
                             .progressViewStyle(StatsProgressStyle())
                             .foregroundColor(.red)
-                            .padding()
+                            .padding(.horizontal,10)
                     }
+                    
                     NavigationLink(destination: SettingsView())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
-                            .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                            .padding()
+                            .frame(minWidth: 25, maxWidth: 30, minHeight: 25, maxHeight: 30)
+                            .fixedSize(horizontal: true, vertical: true)
+                            .padding(.horizontal,10)
                             .foregroundColor(Color.themeForeground)
                         ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
                             .progressViewStyle(StatsProgressStyle())
                             .foregroundColor(.red)
-                            .padding()
+                            .padding(.horizontal,10)
                     }
                 }
+                .padding()
             }
+            .frame(maxWidth: .infinity,maxHeight: .infinity)
             .background(Color(uiColor: .secondarySystemBackground))
             .cornerRadius(20)
-        }
-        .padding()
+            .padding()
+        
+        
     }
 
 }
