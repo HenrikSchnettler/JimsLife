@@ -205,6 +205,7 @@ struct HomeView_Item_Row: View {
                         Label("add", systemImage: "plus")
                     }
                 }
+                .padding()
                 
             })
             
