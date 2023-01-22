@@ -24,6 +24,10 @@
 	<string>Logo</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Allow this app to access your Health data.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Allow this app to write Health data.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
