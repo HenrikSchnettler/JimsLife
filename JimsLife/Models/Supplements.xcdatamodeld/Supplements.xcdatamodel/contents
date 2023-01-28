@@ -11,9 +11,7 @@
         <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="linkedsupplements" inverseEntity="Supplements"/>
     </entity>
     <entity name="Supplements" representedClassName="Supplements" syncable="YES" codeGenerationType="class">
-        <attribute name="categorie" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" preserveAfterDeletion="YES"/>
-        <attribute name="imageName" optional="YES" attributeType="String"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="donesupplements" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DoneSupplements" inverseName="supplements" inverseEntity="DoneSupplements"/>
