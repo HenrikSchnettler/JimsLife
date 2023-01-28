@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 /// Henrik: - HomeView
 struct HomeView: View{
     var body: some View {
@@ -163,13 +164,11 @@ struct HomeView_Item_Row: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.id, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(key: "created_on", ascending: true)],
         animation: .easeIn)
     private var todoSupplementItems: FetchedResults<TodoSupplements>
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \DoneSupplements.id, ascending: true)],
-        animation: .easeIn)
+    @FetchRequest(fetchRequest: DoneSupplements.fetchAllDoneSupplements)
     private var doneSupplementItems: FetchedResults<DoneSupplements>
     
     var body: some View {
@@ -197,10 +196,10 @@ struct HomeView_Item_Row: View {
                             HStack{
                                 ForEach(doneSupplementItems) { item in
                                     Button(role: .destructive){
-                                        addBackTodoSupplement(objectToAdd: item)
+                                        addBackTodoSupplement(objectToAdd: item.supplements!)
                                         deleteDoneSupplement(deleteObject: item)
                                     }label: {
-                                        Label(item.name!, systemImage: "minus.circle")
+                                        Label(item.supplements?.name ?? "", systemImage: "minus.circle")
                                     }
                                 }
                             }
@@ -210,7 +209,7 @@ struct HomeView_Item_Row: View {
                         }
                     ForEach(todoSupplementItems) { item in
                         
-                        HomeView_Item(supplement: item, deleteTodoSupplement: {deleteTodoSupplement(deleteObject: item)}, addDoneSupplement: {addDoneSupplement(objectToAdd: item)})
+                        HomeView_Item(supplement: item, deleteTodoSupplement: {deleteTodoSupplement(deleteObject: item)}, addDoneSupplement: {addDoneSupplement(objectToAdd: item.supplements!)})
                     }
                     //Button(action: addTodoSupplement) {
                         //Label("add", systemImage: "plus")
@@ -224,14 +223,16 @@ struct HomeView_Item_Row: View {
 
     }
     
-    private func addBackTodoSupplement(objectToAdd: DoneSupplements) {
+    private func addBackTodoSupplement(objectToAdd: Supplements) {
         withAnimation {
             let newItem = TodoSupplements(context: viewContext)
-            newItem.id = objectToAdd.id
-            newItem.categorie = objectToAdd.categorie
-            newItem.imageName = objectToAdd.imageName
-            newItem.itemDescription = objectToAdd.itemDescription
-            newItem.name = objectToAdd.name
+            newItem.created_on = Date.now
+            
+            objectToAdd.addToTodosupplements(newItem)
+            //newItem.supplements?.categorie = objectToAdd.supplements?.categorie
+            //newItem.supplements?.imageName = objectToAdd.supplements?.imageName
+            //newItem.supplements?.itemDescription = objectToAdd.supplements?.itemDescription
+            //newItem.supplements?.name = objectToAdd.supplements?.name
 
             do {
                 try viewContext.save()
@@ -259,14 +260,11 @@ struct HomeView_Item_Row: View {
         }
     }
     
-    private func addDoneSupplement(objectToAdd: TodoSupplements) {
+    private func addDoneSupplement(objectToAdd: Supplements) {
         withAnimation {
             let newItem = DoneSupplements(context: viewContext)
-            newItem.id = objectToAdd.id
-            newItem.categorie = objectToAdd.categorie
-            newItem.imageName = objectToAdd.imageName
-            newItem.itemDescription = objectToAdd.itemDescription
-            newItem.name = objectToAdd.name
+            newItem.created_on = Date.now
+            objectToAdd.addToDonesupplements(newItem)
 
             do {
                 try viewContext.save()
