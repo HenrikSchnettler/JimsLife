@@ -123,6 +123,25 @@ extension LinkedSupplements {
         }
     }
     
+    static func addObject(objectToAdd: Supplements,period_days: Int64,quantity_per_period: Int64,from context: NSManagedObjectContext) {
+        let newItem = LinkedSupplements(context: context)
+        
+        newItem.id = UUID()
+        newItem.period_days = period_days
+        newItem.quantity_per_period = quantity_per_period
+        
+        newItem.supplements = objectToAdd
+
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
     static func containsSupplement(object: Supplements,from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<LinkedSupplements> = LinkedSupplements.fetchRequest()
         request.predicate = NSPredicate(format: "supplements != nil", object)
