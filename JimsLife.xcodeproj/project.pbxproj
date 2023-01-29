@@ -14,6 +14,7 @@
 		2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679907265BE3BC00E660A5 /* Config.xcdatamodeld */; };
 		2B73B3DC26262602009FC899 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73B3DB26262602009FC899 /* UITabBarController.swift */; };
 		2B8EEA472985589300BCC858 /* Supplements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EEA462985589300BCC858 /* Supplements.swift */; };
+		2B8EEA4A2987036000BCC858 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EEA492987036000BCC858 /* Date.swift */; };
 		2B9A447528562FBC00B40E7F /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9A447428562FBC00B40E7F /* VisualEffectBlur.swift */; };
 		2BAA6F3C261E252F00D42310 /* JimsLifeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F3B261E252F00D42310 /* JimsLifeApp.swift */; };
 		2BAA6F3E261E252F00D42310 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA6F3D261E252F00D42310 /* MainView.swift */; };
@@ -55,6 +56,7 @@
 		2B679908265BE3BC00E660A5 /* Config.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Config.xcdatamodel; sourceTree = "<group>"; };
 		2B73B3DB26262602009FC899 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		2B8EEA462985589300BCC858 /* Supplements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supplements.swift; sourceTree = "<group>"; };
+		2B8EEA492987036000BCC858 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		2B9A447428562FBC00B40E7F /* VisualEffectBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
 		2BAA6F38261E252F00D42310 /* JimsLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimsLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAA6F3B261E252F00D42310 /* JimsLifeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JimsLifeApp.swift; sourceTree = "<group>"; };
@@ -124,9 +126,18 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		2B8EEA482987034E00BCC858 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2B8EEA492987036000BCC858 /* Date.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2BAA6F2F261E252F00D42310 = {
 			isa = PBXGroup;
 			children = (
+				2B8EEA482987034E00BCC858 /* Extensions */,
 				2BF83E892975FA5200D84F95 /* Launch Screen.storyboard */,
 				2BF83E8529744EB200D84F95 /* Localizable.strings */,
 				2BAA6F3A261E252F00D42310 /* JimsLife */,
@@ -368,6 +379,7 @@
 				2B398C472870F031001693BA /* SettingsView.swift in Sources */,
 				2BF83E7E2971CD5F00D84F95 /* Persistence.swift in Sources */,
 				2BAA6F3C261E252F00D42310 /* JimsLifeApp.swift in Sources */,
+				2B8EEA4A2987036000BCC858 /* Date.swift in Sources */,
 				2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

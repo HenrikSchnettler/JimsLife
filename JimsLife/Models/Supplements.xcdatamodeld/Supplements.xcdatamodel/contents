@@ -3,25 +3,32 @@
     <entity name="DoneSupplements" representedClassName="DoneSupplements" syncable="YES" codeGenerationType="class">
         <attribute name="created_on" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="expires" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="linkedsupplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LinkedSupplements" inverseName="donesupplements" inverseEntity="LinkedSupplements"/>
         <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="donesupplements" inverseEntity="Supplements"/>
     </entity>
-    <entity name="LinkedSupplements" representedClassName="LinkedSupplements" parentEntity="Supplements" syncable="YES" codeGenerationType="class">
+    <entity name="LinkedSupplements" representedClassName="LinkedSupplements" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="period_days" optional="YES" attributeType="Integer 64" minValueString="1" maxValueString="365" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="quantity_per_period" optional="YES" attributeType="Integer 64" minValueString="1" maxValueString="20" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="donesupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoneSupplements" inverseName="linkedsupplements" inverseEntity="DoneSupplements"/>
         <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="linkedsupplements" inverseEntity="Supplements"/>
+        <relationship name="todosupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TodoSupplements" inverseName="linkedsupplements" inverseEntity="TodoSupplements"/>
     </entity>
     <entity name="Supplements" representedClassName="Supplements" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" preserveAfterDeletion="YES"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="donesupplements" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DoneSupplements" inverseName="supplements" inverseEntity="DoneSupplements"/>
-        <relationship name="linkedsupplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LinkedSupplements" inverseName="supplements" inverseEntity="LinkedSupplements"/>
-        <relationship name="todosupplements" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TodoSupplements" inverseName="supplements" inverseEntity="TodoSupplements"/>
+        <relationship name="donesupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoneSupplements" inverseName="supplements" inverseEntity="DoneSupplements"/>
+        <relationship name="linkedsupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="LinkedSupplements" inverseName="supplements" inverseEntity="LinkedSupplements"/>
+        <relationship name="todosupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TodoSupplements" inverseName="supplements" inverseEntity="TodoSupplements"/>
     </entity>
     <entity name="TodoSupplements" representedClassName="TodoSupplements" syncable="YES" codeGenerationType="class">
         <attribute name="created_on" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="expires" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="quantity_left" optional="YES" attributeType="Integer 64" minValueString="0" maxValueString="20" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="linkedsupplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LinkedSupplements" inverseName="todosupplements" inverseEntity="LinkedSupplements"/>
         <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="todosupplements" inverseEntity="Supplements"/>
     </entity>
 </model>

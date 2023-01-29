@@ -162,12 +162,14 @@ struct StatsView: View {
 struct HomeView_Item_Row: View {
     @State var showComposeMessageView: Bool = false
     @Environment(\.managedObjectContext) private var viewContext
-
+    
+    //Todo supplements are fetched
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(key: "created_on", ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.quantity_left, ascending: true)],
         animation: .easeIn)
     private var todoSupplementItems: FetchedResults<TodoSupplements>
     
+    //Done supplements are fetched
     @FetchRequest(fetchRequest: DoneSupplements.fetchAllDoneSupplements)
     private var doneSupplementItems: FetchedResults<DoneSupplements>
     
@@ -196,8 +198,8 @@ struct HomeView_Item_Row: View {
                             HStack{
                                 ForEach(doneSupplementItems) { item in
                                     Button(role: .destructive){
-                                        addBackTodoSupplement(objectToAdd: item.supplements!)
-                                        deleteDoneSupplement(deleteObject: item)
+                                        TodoSupplements.addObject(objectToAdd: item.linkedsupplements!, from: viewContext)
+                                        DoneSupplements.removeObject(object: item, from: viewContext)
                                     }label: {
                                         Label(item.supplements?.name ?? "", systemImage: "minus.circle")
                                     }
@@ -208,8 +210,7 @@ struct HomeView_Item_Row: View {
                             print("Test")
                         }
                     ForEach(todoSupplementItems) { item in
-                        
-                        HomeView_Item(supplement: item, deleteTodoSupplement: {deleteTodoSupplement(deleteObject: item)}, addDoneSupplement: {addDoneSupplement(objectToAdd: item.supplements!)})
+                        HomeView_Item(context: viewContext, supplement: item.supplements!)
                     }
                     //Button(action: addTodoSupplement) {
                         //Label("add", systemImage: "plus")
@@ -222,83 +223,12 @@ struct HomeView_Item_Row: View {
         }
 
     }
-    
-    private func addBackTodoSupplement(objectToAdd: Supplements) {
-        withAnimation {
-            let newItem = TodoSupplements(context: viewContext)
-            newItem.created_on = Date.now
-            
-            objectToAdd.addToTodosupplements(newItem)
-            //newItem.supplements?.categorie = objectToAdd.supplements?.categorie
-            //newItem.supplements?.imageName = objectToAdd.supplements?.imageName
-            //newItem.supplements?.itemDescription = objectToAdd.supplements?.itemDescription
-            //newItem.supplements?.name = objectToAdd.supplements?.name
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func deleteTodoSupplement(deleteObject: TodoSupplements) {
-        withAnimation {
-            viewContext.delete(deleteObject)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func addDoneSupplement(objectToAdd: Supplements) {
-        withAnimation {
-            let newItem = DoneSupplements(context: viewContext)
-            newItem.created_on = Date.now
-            objectToAdd.addToDonesupplements(newItem)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func deleteDoneSupplement(deleteObject: DoneSupplements) {
-        withAnimation {
-            viewContext.delete(deleteObject)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
 }
 
 struct HomeView_Item: View {
-    
-    var supplement: AnyObject
-    var deleteTodoSupplement: () -> Void
-    
-    var addDoneSupplement: () -> Void
+    var context: NSManagedObjectContext
+    var supplement: Supplements
+
     var body: some View {
         
         Capsule()
@@ -311,27 +241,27 @@ struct HomeView_Item: View {
                             .fill(Color.ContentOverAccent)
                             .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
                             .overlay(
-                                Text(supplement.name.prefix(1))
+                                Text(supplement.name!.prefix(1))
                                     .foregroundColor(Color.InvertedContentOverAccent )
                                     .frame(width: 40, height: 40)
                                     
                             )
-                        Text(supplement.name).bold().foregroundColor(Color.ContentOverAccent)
+                        Text(supplement.name!).bold().foregroundColor(Color.ContentOverAccent)
                     }
                 }
             )
             .contextMenu{
                 Button{
                     //add Supplement to todays done supplements
-                    addDoneSupplement()
+                    DoneSupplements.addObject(objectToAdd: supplement.linkedsupplements!, from: context)
                     //remove the supplement from the todoSupplement Store
-                    deleteTodoSupplement()
+                    TodoSupplements.removeObject(object: supplement.todosupplements!, from: context)
                 }label: {
                     Label("supplement taken", systemImage: "checkmark.circle")
                 }
                 Button(role: .destructive){
                     //only remove the supplement from todays todo store because it´s skipped today
-                    deleteTodoSupplement()
+                    TodoSupplements.removeObject(object: supplement.todosupplements!, from: context)
                 }label: {
                     Label("skip", systemImage: "minus.circle")
                 }
