@@ -56,7 +56,7 @@ extension DoneSupplements {
     
     static var fetchAllDoneSupplements: NSFetchRequest<DoneSupplements> {
         let request: NSFetchRequest<DoneSupplements> = DoneSupplements.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "created _on", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \DoneSupplements.created_on, ascending: true)]
         request.includesSubentities = true
         return request
     }
