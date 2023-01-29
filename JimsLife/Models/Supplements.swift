@@ -22,7 +22,6 @@ extension DoneSupplements {
     
     static func addObject(objectToAdd: LinkedSupplements,from context: NSManagedObjectContext) {
         let newItem = DoneSupplements(context: context)
-        let calendar = Calendar.current
         
         newItem.id = UUID()
         newItem.created_on = Date.now
@@ -43,7 +42,8 @@ extension DoneSupplements {
     
     static func containsSupplement(object: Supplements,from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<DoneSupplements> = DoneSupplements.fetchRequest()
-        request.predicate = NSPredicate(format: "supplements == %@", object)
+        request.predicate = NSPredicate(format: "supplements != nil", object)
+        //request.predicate = NSPredicate(format: "supplements == %@", object)
         
         do {
             let count = try context.count(for: request)
@@ -98,7 +98,8 @@ extension TodoSupplements {
     
     static func containsSupplement(object: Supplements, from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<TodoSupplements> = TodoSupplements.fetchRequest()
-        request.predicate = NSPredicate(format: "self == %@", object)
+        request.predicate = NSPredicate(format: "supplements != nil", object)
+        //request.predicate = NSPredicate(format: "supplements == %@", object)
         
         do {
             let count = try context.count(for: request)
@@ -124,7 +125,8 @@ extension LinkedSupplements {
     
     static func containsSupplement(object: Supplements,from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<LinkedSupplements> = LinkedSupplements.fetchRequest()
-        request.predicate = NSPredicate(format: "self == %@", object)
+        request.predicate = NSPredicate(format: "supplements != nil", object)
+        //request.predicate = NSPredicate(format: "supplements == %@", object)
         
         do {
             let count = try context.count(for: request)

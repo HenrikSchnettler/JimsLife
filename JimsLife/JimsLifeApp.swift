@@ -72,7 +72,6 @@ struct JimsLifeApp: App {
                 .onAppear(){
                    configureStoresOnStart()
                 }
-                
         }
     }
 }

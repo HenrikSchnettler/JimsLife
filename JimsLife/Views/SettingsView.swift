@@ -10,64 +10,78 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    //linked supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \LinkedSupplements.id, ascending: true)],
+        animation: .easeIn)
+    private var linkedSupplementItems: FetchedResults<LinkedSupplements>
+    
+    //todo supplemtns are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.quantity_left, ascending: false)],
+        animation: .easeIn)
+    private var todoSupplementItems: FetchedResults<TodoSupplements>
+    
+    //done supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \DoneSupplements.created_on, ascending: false)],
+        animation: .easeIn)
+    private var doneSupplementItems: FetchedResults<DoneSupplements>
+    
+    //all supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Supplements.name, ascending: true)],
+        predicate: NSPredicate(format: "linkedsupplements == nil"),
+        animation: .easeIn)
+    private var allSupplementsItems: FetchedResults<Supplements>
+    
+    @State private var showAddSupplementAlert = false
     var body: some View {
         NavigationView{
             HStack(alignment: .top){
                 VStack{
                     List{
                         Section(header: Text("active supplements:")){
-                            Text("Aktives Supplement 1")
-                            Text("Aktives Supplement 2")
-                            
+                            ForEach(linkedSupplementItems) { item in
+                                HStack{
+                                    Text(item.supplements?.name ?? "")
+                                    Spacer()
+                                    Button(action: {
+                                        LinkedSupplements.removeObject(object: item, from: viewContext)
+                                    }) {
+                                        Image(systemName: "minus")
+                                            .foregroundColor(.red)
+                                    }
+
+                                }
+                            }
                         }
                         Section(header: Text("more possible supplements:")){
-                            Text("Mögliches Supplement 1")
-                            Text("Mögliches Supplement 2")
+                            ForEach(allSupplementsItems) { item in
+                                HStack{
+                                    Text(item.name ?? "")
+                                    Spacer()
+                                    Button(action: {
+                                        showAddSupplementAlert = true
+                                    })
+                                    {
+                                        Image(systemName: "plus")
+                                            .foregroundColor(.green)
+                                    }
+                                    .alert("add supplement", isPresented: $showAddSupplementAlert, actions: {
+                                        
+                                    }, message: {
+                                        Text("please enter the period lenght and quantity of supplements you want to take per period")
+                                    })
+
+                                }
+                            }
                         }
                     }
                 }
             }
             Spacer()
         }.navigationTitle("my supplements")
-        
-    }
-    
-    private func addLinkedSupplement(objectToAdd: Supplements, periodDays: Int64, quantity_per_period: Int64) {
-        withAnimation {
-            let newItem = LinkedSupplements(context: viewContext)
-            newItem.quantity_per_period = Int64()
-            newItem.period_days = Int64()
-            newItem.supplements = objectToAdd
-            
-            //newItem.supplements?.categorie = objectToAdd.supplements?.categorie
-            //newItem.supplements?.imageName = objectToAdd.supplements?.imageName
-            //newItem.supplements?.itemDescription = objectToAdd.supplements?.itemDescription
-            //newItem.supplements?.name = objectToAdd.supplements?.name
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func deleteLinkedSupplement(deleteObject: LinkedSupplements) {
-        withAnimation {
-            viewContext.delete(deleteObject)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
     }
 }
 
