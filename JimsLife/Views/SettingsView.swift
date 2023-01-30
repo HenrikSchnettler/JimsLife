@@ -36,6 +36,9 @@ struct SettingsView: View {
     private var allSupplementsItems: FetchedResults<Supplements>
     
     @State private var showAddSupplementAlert = false
+    @Binding var period_days: Int
+    @Binding var quantity_per_period: Int
+    
     var body: some View {
         NavigationView{
             HStack(alignment: .top){
@@ -69,7 +72,33 @@ struct SettingsView: View {
                                             .foregroundColor(.green)
                                     }
                                     .alert("add supplement", isPresented: $showAddSupplementAlert, actions: {
+                                        //period lenght combobox, validation
+                                        Picker("Select a number", selection: $period_days){
+                                            ForEach(1...20, id: \.self){
+                                                Text("\($0)").tag($0)
+                                            }
+                                        }
+                                        .pickerStyle(SegmentedPickerStyle())
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(5)
                                         
+                                        //quantity numberfield, validation
+                                        Picker("Select a number", selection: $quantity_per_period){
+                                            ForEach(1...365, id: \.self){
+                                                Text("\($0)").tag($0)
+                                            }
+                                        }
+                                        .pickerStyle(SegmentedPickerStyle())
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(5)
+                                        
+                                        Button("link supplement", action: {
+                                            LinkedSupplements.addObject(objectToAdd: item, period_days: Int64(period_days), quantity_per_period: Int64(quantity_per_period), from: viewContext)
+                                        })
+                                        
+                                        Button("cancel", role: .cancel, action: {
+                                            
+                                        })
                                     }, message: {
                                         Text("please enter the period lenght and quantity of supplements you want to take per period")
                                     })
