@@ -36,9 +36,9 @@ struct SettingsView: View {
     private var allSupplementsItems: FetchedResults<Supplements>
     
     @State private var showAddSupplementAlert = false
-    @Binding var period_days: Int
-    @Binding var quantity_per_period: Int
-    
+    @State var period_days: Int = 1
+    @State var quantity_per_period: Int = 1
+     
     var body: some View {
         NavigationView{
             HStack(alignment: .top){
