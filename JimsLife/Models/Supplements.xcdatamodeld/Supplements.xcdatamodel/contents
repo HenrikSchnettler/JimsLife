@@ -31,4 +31,18 @@
         <relationship name="linkedsupplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LinkedSupplements" inverseName="todosupplements" inverseEntity="LinkedSupplements"/>
         <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="todosupplements" inverseEntity="Supplements"/>
     </entity>
+    <configuration name="CloudKit" usedWithCloudKit="YES">
+        <memberEntity name="Supplements"/>
+        <memberEntity name="TodoSupplements"/>
+        <memberEntity name="LinkedSupplements"/>
+        <memberEntity name="DoneSupplements"/>
+    </configuration>
+    <configuration name="Private">
+        <memberEntity name="LinkedSupplements"/>
+        <memberEntity name="TodoSupplements"/>
+        <memberEntity name="DoneSupplements"/>
+    </configuration>
+    <configuration name="Public">
+        <memberEntity name="Supplements"/>
+    </configuration>
 </model>
