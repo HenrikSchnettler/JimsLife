@@ -56,12 +56,14 @@ struct MainView: View {
         Supplements.fetchDataFromCloudKit { (records) in
             if let records = records {
                 for item in records{
-                    
+                    //check if supplement with this id already exists in the users private store
                     if(Supplements.recordExists(supplementId: item.value(forKey: "CD_id") as! String, from: viewContext))
                     {
+                        //check if the record in the users private database is up to date or outdated
                         
                     }
                     else{
+                        //record is added to coredata and the users private database
                         Supplements.createObjectWithRecord(record: item, from: viewContext)
                     }
                 }
