@@ -41,8 +41,7 @@
         <memberEntity name="LinkedSupplements"/>
         <memberEntity name="TodoSupplements"/>
         <memberEntity name="DoneSupplements"/>
-    </configuration>
-    <configuration name="Public">
         <memberEntity name="Supplements"/>
     </configuration>
+    <configuration name="Public"/>
 </model>

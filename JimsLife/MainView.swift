@@ -27,6 +27,74 @@ enum Tabs: String{
 
 struct MainView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    //Todo supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.quantity_left, ascending: true)],
+        animation: .easeIn)
+    private var todoSupplementItems: FetchedResults<TodoSupplements>
+    
+    //Done supplements are fetched
+    @FetchRequest(fetchRequest: DoneSupplements.fetchAllDoneSupplements)
+    private var doneSupplementItems: FetchedResults<DoneSupplements>
+    
+    //linked supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \LinkedSupplements.id, ascending: true)],
+        animation: .easeIn)
+    private var linkedSupplementItems: FetchedResults<LinkedSupplements>
+    
+    //supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Supplements.itemDescription, ascending: false)],
+        animation: .easeIn)
+    private var supplementItems: FetchedResults<Supplements>
+    
+    private func configureStoresOnStart(){
+        //Get all supplements from the public CloudKit database
+        Supplements.fetchDataFromCloudKit { (records) in
+            if let records = records {
+                for item in records{
+                    
+                    if(Supplements.recordExists(supplementId: item.value(forKey: "CD_id") as! String, from: viewContext))
+                    {
+                        
+                    }
+                    else{
+                        Supplements.createObjectWithRecord(record: item, from: viewContext)
+                    }
+                }
+            } else {
+              print("Error fetching data from CloudKit")
+            }
+          }
+        //todo supplements which are expired are removed from the store
+        for item in todoSupplementItems{
+            if(item.expires! <= Date.now)
+            {
+                TodoSupplements.removeObject(object: item, from: viewContext)
+            }
+        }
+        
+        //done supplements which are expired are removed from the store
+        for item in doneSupplementItems{
+            if(item.expires! <= Date.now)
+            {
+                DoneSupplements.removeObject(object: item, from: viewContext)
+            }
+        }
+        
+        //loop over linkedSupplements to check if there is an object of it in todoSupplements or doneSupplements
+        for item in linkedSupplementItems{
+            if(!TodoSupplements.containsSupplement(object: item.supplements!, from: viewContext) && DoneSupplements.containsSupplement(object: item.supplements!, from: viewContext))
+            {
+                //if there doesnt exists the linkedSupplement in Todo or done the there must be created a new one in todo
+                TodoSupplements.addObject(objectToAdd: item, from: viewContext)
+            }
+        }
+    }
+    
     init() {
         
     }
@@ -38,6 +106,9 @@ struct MainView: View {
             TabView(selection: $selection){
                     //Übersicht Tab
                     HomeView()
+                    .onAppear(){
+                        configureStoresOnStart()
+                    }
                     .tag(Tabs.home)
                 
                     .tabItem {
