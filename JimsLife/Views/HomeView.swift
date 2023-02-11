@@ -212,9 +212,9 @@ struct HomeView_Item_Row: View {
                     ForEach(todoSupplementItems) { item in
                         HomeView_Item(context: viewContext, supplement: item.supplements!)
                     }
-                    //Button(action: addTodoSupplement) {
-                        //Label("add", systemImage: "plus")
-                    //}
+                    NavigationLink(destination: SettingsView()) {
+                        Label("add", systemImage: "plus")
+                    }
                 }
                 .padding()
                 
