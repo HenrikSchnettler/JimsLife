@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B398C472870F031001693BA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B398C462870F031001693BA /* SettingsView.swift */; };
 		2B398C8028710080001693BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B398C7F28710080001693BA /* GoogleService-Info.plist */; };
+		2B43B633299921BE002EB657 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B43B632299921BE002EB657 /* View.swift */; };
+		2B43B63929992AED002EB657 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B43B63829992AED002EB657 /* ErrorHandler.swift */; };
 		2B5C0190262B002300942C48 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5C018F262B002300942C48 /* ColorExtension.swift */; };
 		2B679906265BDE5300E660A5 /* Supplements.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679904265BDE5300E660A5 /* Supplements.xcdatamodeld */; };
 		2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679907265BE3BC00E660A5 /* Config.xcdatamodeld */; };
@@ -51,6 +53,8 @@
 /* Begin PBXFileReference section */
 		2B398C462870F031001693BA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2B398C7F28710080001693BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2B43B632299921BE002EB657 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		2B43B63829992AED002EB657 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		2B5C018F262B002300942C48 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		2B679905265BDE5300E660A5 /* Supplements.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Supplements.xcdatamodel; sourceTree = "<group>"; };
 		2B679908265BE3BC00E660A5 /* Config.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Config.xcdatamodel; sourceTree = "<group>"; };
@@ -108,6 +112,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B43B63729992ABD002EB657 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2B43B63829992AED002EB657 /* ErrorHandler.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		2B5C018E262B000300942C48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				2B8EEA492987036000BCC858 /* Date.swift */,
+				2B43B632299921BE002EB657 /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -163,6 +176,7 @@
 			children = (
 				2BF83E7C2971CCAA00D84F95 /* JimsLife.entitlements */,
 				2B398C7F28710080001693BA /* GoogleService-Info.plist */,
+				2B43B63729992ABD002EB657 /* Classes */,
 				2B88A0FE262B3A5E003B2658 /* Models */,
 				2B5C018E262B000300942C48 /* Resources */,
 				2BAA6F6D261E395500D42310 /* Views */,
@@ -380,6 +394,8 @@
 				2BF83E7E2971CD5F00D84F95 /* Persistence.swift in Sources */,
 				2BAA6F3C261E252F00D42310 /* JimsLifeApp.swift in Sources */,
 				2B8EEA4A2987036000BCC858 /* Date.swift in Sources */,
+				2B43B63929992AED002EB657 /* ErrorHandler.swift in Sources */,
+				2B43B633299921BE002EB657 /* View.swift in Sources */,
 				2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,7 +496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -536,7 +552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -27,3 +27,12 @@
 "skip" = "Überspringen";
 "add supplement" = "Supplement hinzufügen";
 "please enter the period lenght and quantity of supplements you want to take per period" = "Bitte gib die Periodenlänge und die Anzahl an Supplementen welche du pro Periode nehmen möchtest";
+"cancel" = "Abbrechen";
+"period lenght" = "Periodenlänge";
+"period lenght (in days)" = "Periodenlänge (in Tagen)";
+"quantity" = "Anzahl";
+"Deactivate supplement?" = "Deactivate supplement?";
+"Error while adding supplement" = "Fehler während dem Hinzufügen des Supplements";
+"Error while removing supplement" = "Fehler während dem Entfernen des Supplements";
+"the supplement couldnt be added to your supplements" = "Das Supplement konnte nicht zu deinen Supplements hinzugefügt werden";
+"the supplement couldnt be removed from your supplements" = "Das Supplement konnte nicht von deinen Supplements entfernt werden";

@@ -113,18 +113,20 @@ extension TodoSupplements {
 }
 
 extension LinkedSupplements {
-    static func removeObject(object: LinkedSupplements,from context: NSManagedObjectContext)
+    static func removeObject(object: LinkedSupplements,from context: NSManagedObjectContext) -> (success: Bool, errorMessage: String?)
     {
         context.delete(object)
         
         do {
             try context.save()
+            return (success: true, errorMessage: nil)
         } catch {
-            // handle error
+            print("Error validating delete: \(error)")
+            return (success: false, errorMessage: error.localizedDescription)
         }
     }
     
-    static func addObject(objectToAdd: Supplements,period_days: Int64,quantity_per_period: Int64,from context: NSManagedObjectContext) {
+    static func addObject(objectToAdd: Supplements,period_days: Int64,quantity_per_period: Int64,from context: NSManagedObjectContext) -> (success: Bool, errorMessage: String?) {
         let newItem = LinkedSupplements(context: context)
         
         newItem.id = UUID()
@@ -134,12 +136,13 @@ extension LinkedSupplements {
         newItem.supplements = objectToAdd
 
         do {
+            try newItem.validateForInsert()
             try context.save()
+            return (success: true, errorMessage: nil)
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            print("Error validating insert: \(error)")
+            context.delete(newItem)
+            return (success: false, errorMessage: error.localizedDescription)
         }
     }
     

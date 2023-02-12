@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SettingsView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -36,8 +37,13 @@ struct SettingsView: View {
     private var allSupplementsItems: FetchedResults<Supplements>
     
     @State private var showAddSupplementAlert = false
-    @State var period_days: Int = 1
-    @State var quantity_per_period: Int = 1
+    @State private var showDeleteSupplementConfirm = false
+    @State private var showErrorAlert = false
+    
+    @State var period_days: String = ""
+    @State var quantity_per_period: String = ""
+    
+    @StateObject var errorHandlerObj = ErrorHandler()
      
     var body: some View {
         NavigationView{
@@ -47,13 +53,38 @@ struct SettingsView: View {
                         Section(header: Text("active supplements:")){
                             ForEach(linkedSupplementItems) { item in
                                 HStack{
+                                    Circle()
+                                        .fill(Color.ContentOverAccent)
+                                        .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
+                                        .overlay(
+                                            Text(item.supplements!.name!.prefix(2).uppercased())
+                                                .foregroundColor(Color.InvertedContentOverAccent )
+                                                .frame(width: 40, height: 40)
+                                                
+                                        )
                                     Text(item.supplements?.name ?? "")
                                     Spacer()
                                     Button(action: {
-                                        LinkedSupplements.removeObject(object: item, from: viewContext)
+                                        showDeleteSupplementConfirm = true
                                     }) {
-                                        Image(systemName: "minus")
+                                        Image(systemName: "minus.circle.fill")
                                             .foregroundColor(.red)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                    .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
+                                    .confirmationDialog("Are you sure?",
+                                         isPresented: $showDeleteSupplementConfirm) {
+                                         Button("Deactivate supplement?", role: .destructive) {
+                                             let (success, errorMessage) = LinkedSupplements.removeObject(object: item, from: viewContext)
+                                             
+                                             if success {
+                                                 // The supplement was successfully removed
+                                             } else {
+                                                 // The supplement couldnt be removed
+                                                 errorHandlerObj.selectError(ErrorCase: ErrorHandler.Error.removeSupplementValidation)
+                                             }
+                                             showDeleteSupplementConfirm = false
+                                         }
                                     }
 
                                 }
@@ -62,47 +93,55 @@ struct SettingsView: View {
                         Section(header: Text("more possible supplements:")){
                             ForEach(allSupplementsItems) { item in
                                 HStack{
+                                    Circle()
+                                        .fill(Color.ContentOverAccent)
+                                        .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
+                                        .overlay(
+                                            Text(item.name!.prefix(2).uppercased())
+                                                .foregroundColor(Color.InvertedContentOverAccent )
+                                                .frame(width: 40, height: 40)
+                                                
+                                        )
                                     Text(item.name ?? "")
                                     Spacer()
                                     Button(action: {
                                         showAddSupplementAlert = true
+                                        period_days = ""
+                                        quantity_per_period = ""
                                     })
                                     {
-                                        Image(systemName: "plus")
+                                        Image(systemName: "plus.circle.fill")
                                             .foregroundColor(.green)
                                     }
+                                    .buttonStyle(PlainButtonStyle())
+                                    .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
                                     .alert("add supplement", isPresented: $showAddSupplementAlert, actions: {
-                                        //period lenght combobox, validation
-                                        Picker("Select a number", selection: $period_days){
-                                            ForEach(1...20, id: \.self){
-                                                Text("\($0)").tag($0)
-                                            }
-                                        }
-                                        .pickerStyle(SegmentedPickerStyle())
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(5)
+                                        TextField("period lenght (in days)", text: $period_days)
+                                            .keyboardType(.numberPad)
+
                                         
-                                        //quantity numberfield, validation
-                                        Picker("Select a number", selection: $quantity_per_period){
-                                            ForEach(1...365, id: \.self){
-                                                Text("\($0)").tag($0)
-                                            }
-                                        }
-                                        .pickerStyle(SegmentedPickerStyle())
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(5)
-                                        
-                                        Button("link supplement", action: {
-                                            LinkedSupplements.addObject(objectToAdd: item, period_days: Int64(period_days), quantity_per_period: Int64(quantity_per_period), from: viewContext)
-                                        })
-                                        
-                                        Button("cancel", role: .cancel, action: {
+                                        TextField("quantity", text: $quantity_per_period)
+                                            .keyboardType(.numberPad)
+
+                                                
+                                        Button("add supplement", action: {
+                                            showAddSupplementAlert = false
+                                            let (success, errorMessage) = LinkedSupplements.addObject(objectToAdd: item, period_days: Int64(period_days) ?? 1, quantity_per_period: Int64(quantity_per_period) ?? 1, from: viewContext)
                                             
+                                            if success {
+                                                // The supplement was successfully added
+                                            } else {
+                                                // The supplement couldnt be added
+                                                errorHandlerObj.selectError(ErrorCase: ErrorHandler.Error.linkSupplementValidation)
+                                            }
+                                        })
+                                                                                
+                                        Button("cancel", role: .cancel, action: {
+                                            showAddSupplementAlert = false
                                         })
                                     }, message: {
                                         Text("please enter the period lenght and quantity of supplements you want to take per period")
                                     })
-
                                 }
                             }
                         }
@@ -111,6 +150,7 @@ struct SettingsView: View {
             }
             Spacer()
         }.navigationTitle("my supplements")
+            .errorAlert(error: $errorHandlerObj.error)
     }
 }
 

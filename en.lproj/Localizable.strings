@@ -27,3 +27,12 @@
 "skip" = "skip";
 "add supplement" = "add supplement";
 "please enter the period lenght and quantity of supplements you want to take per period" = "please enter the period lenght and quantity of supplements you want to take per period";
+"cancel" = "cancel";
+"period lenght" = "period lenght";
+"period lenght (in days)" = "period lenght (in days)";
+"quantity" = "quantity";
+"Deactivate supplement?" = "Supplement deaktivieren?";
+"Error while adding supplement" = "Error while adding supplement";
+"Error while removing supplement" = "Error while removing supplement";
+"the supplement couldnt be added to your supplements" = "the supplement couldnt be added to your supplements";
+"the supplement couldnt be removed from your supplements" = "the supplement couldnt be removed from your supplements";
