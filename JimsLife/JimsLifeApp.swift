@@ -23,7 +23,7 @@ struct JimsLifeApp: App {
             MainView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onAppear(){
-                
+                   
                 }
         }
     }

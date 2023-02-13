@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 enum Tabs: String{
     case home = "appname"
@@ -51,7 +52,7 @@ struct MainView: View {
         animation: .easeIn)
     private var supplementItems: FetchedResults<Supplements>
     
-    private func configureStoresOnStart(){
+    private func manageSupplementStores(){
         //Get all supplements from the public CloudKit database
         Supplements.fetchDataFromCloudKit { (records) in
             if let records = records {
@@ -89,7 +90,7 @@ struct MainView: View {
         
         //loop over linkedSupplements to check if there is an object of it in todoSupplements or doneSupplements
         for item in linkedSupplementItems{
-            if(!TodoSupplements.containsSupplement(object: item.supplements!, from: viewContext) && DoneSupplements.containsSupplement(object: item.supplements!, from: viewContext))
+            if(!TodoSupplements.containsSupplement(object: item.supplements!, from: viewContext) && !DoneSupplements.containsSupplement(object: item.supplements!, from: viewContext))
             {
                 //if there doesnt exists the linkedSupplement in Todo or done the there must be created a new one in todo
                 TodoSupplements.addObject(objectToAdd: item, from: viewContext)
@@ -108,10 +109,11 @@ struct MainView: View {
             TabView(selection: $selection){
                     //Übersicht Tab
                     HomeView()
-                    .onAppear(){
-                        configureStoresOnStart()
-                    }
                     .tag(Tabs.home)
+                    .onAppear(){
+                        //if home view is shown the supplement stores should be synchronized
+                        manageSupplementStores()
+                    }
                 
                     .tabItem {
                         Text("overview")
@@ -163,6 +165,10 @@ struct MainView: View {
             .accentColor(Color.themeAccent)
         
         }
+        .onAppear(){
+            //called on app start
+            
+        }
         .sheet(isPresented: $showComposeMessageView, content: {
             NavigationView{
                 ZStack {
@@ -202,7 +208,10 @@ struct MainView: View {
                             
                             List {
                                 Section(header: Text("overview")){
-                                    NavigationLink(destination: SettingsView())
+                                    NavigationLink(destination: SettingsView().onDisappear(){
+                                        //if home view is shown the supplement stores should be synchronized
+                                        manageSupplementStores()
+                                    })
                                     {
                                         Text("my supplements")
                                     }
