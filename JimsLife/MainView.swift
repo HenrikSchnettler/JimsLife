@@ -41,6 +41,12 @@ struct MainView: View {
     @FetchRequest(fetchRequest: DoneSupplements.fetchAllDoneSupplements)
     private var doneSupplementItems: FetchedResults<DoneSupplements>
     
+    //Skipped supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \SkippedSupplements.created_on, ascending: true)],
+        animation: .easeIn)
+    private var skippedSupplementItems: FetchedResults<SkippedSupplements>
+    
     //linked supplements are fetched
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \LinkedSupplements.id, ascending: true)],
@@ -89,9 +95,18 @@ struct MainView: View {
             }
         }
         
-        //loop over linkedSupplements to check if there is an object of it in todoSupplements or doneSupplements
+        //skipped supplements which are expired are removed from the store
+        for item in skippedSupplementItems{
+            if(item.expires! <= Date.now)
+            {
+                SkippedSupplements.removeObject(object: item, from: viewContext)
+            }
+        }
+        
+        //loop over linkedSupplements to check if there is an object of it in todoSupplements or doneSupplements or skippedsupplements
         for item in linkedSupplementItems{
-            if(!TodoSupplements.containsSupplement(object: item.supplements!, from: viewContext) && !DoneSupplements.containsSupplement(object: item.supplements!, from: viewContext))
+            if(!TodoSupplements.containsSupplement(object: item.supplements!, from: viewContext) && !DoneSupplements.containsSupplement(object: item.supplements!, from: viewContext) &&
+               !SkippedSupplements.containsSupplement(object: item.supplements!, from: viewContext))
             {
                 //if there doesnt exists the linkedSupplement in Todo or done the there must be created a new one in todo
                 TodoSupplements.addObject(objectToAdd: item, from: viewContext)

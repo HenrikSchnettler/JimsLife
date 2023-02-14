@@ -12,8 +12,16 @@
         <attribute name="period_days" optional="YES" attributeType="Integer 64" minValueString="1" maxValueString="365" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="quantity_per_period" optional="YES" attributeType="Integer 64" minValueString="1" maxValueString="20" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="donesupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoneSupplements" inverseName="linkedsupplements" inverseEntity="DoneSupplements"/>
+        <relationship name="skippedsupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SkippedSupplements" inverseName="linkedsupplements" inverseEntity="SkippedSupplements"/>
         <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="linkedsupplements" inverseEntity="Supplements"/>
         <relationship name="todosupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TodoSupplements" inverseName="linkedsupplements" inverseEntity="TodoSupplements"/>
+    </entity>
+    <entity name="SkippedSupplements" representedClassName="SkippedSupplements" syncable="YES" codeGenerationType="class">
+        <attribute name="created_on" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expires" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="linkedsupplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LinkedSupplements" inverseName="skippedsupplements" inverseEntity="LinkedSupplements"/>
+        <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="skippedsupplements" inverseEntity="Supplements"/>
     </entity>
     <entity name="Supplements" representedClassName="Supplements" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" preserveAfterDeletion="YES"/>
@@ -21,6 +29,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="donesupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoneSupplements" inverseName="supplements" inverseEntity="DoneSupplements"/>
         <relationship name="linkedsupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="LinkedSupplements" inverseName="supplements" inverseEntity="LinkedSupplements"/>
+        <relationship name="skippedsupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SkippedSupplements" inverseName="supplements" inverseEntity="SkippedSupplements"/>
         <relationship name="todosupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TodoSupplements" inverseName="supplements" inverseEntity="TodoSupplements"/>
     </entity>
     <entity name="TodoSupplements" representedClassName="TodoSupplements" syncable="YES" codeGenerationType="class">
@@ -36,12 +45,14 @@
         <memberEntity name="TodoSupplements"/>
         <memberEntity name="LinkedSupplements"/>
         <memberEntity name="DoneSupplements"/>
+        <memberEntity name="SkippedSupplements"/>
     </configuration>
     <configuration name="Private">
         <memberEntity name="LinkedSupplements"/>
         <memberEntity name="TodoSupplements"/>
         <memberEntity name="DoneSupplements"/>
         <memberEntity name="Supplements"/>
+        <memberEntity name="SkippedSupplements"/>
     </configuration>
     <configuration name="Public"/>
 </model>

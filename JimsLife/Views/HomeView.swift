@@ -260,6 +260,8 @@ struct HomeView_Item: View {
                     Label("supplement taken", systemImage: "checkmark.circle")
                 }
                 Button(role: .destructive){
+                    //add supplements to skipped supplements
+                    SkippedSupplements.addObject(objectToAdd: supplement.linkedsupplements!, from: context)
                     //only remove the supplement from todays todo store because it´s skipped today
                     TodoSupplements.removeObject(object: supplement.todosupplements!, from: context)
                 }label: {

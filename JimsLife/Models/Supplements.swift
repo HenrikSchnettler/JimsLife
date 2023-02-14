@@ -63,6 +63,53 @@ extension DoneSupplements {
     }
 }
 
+extension SkippedSupplements {
+    static func removeObject(object: SkippedSupplements,from context: NSManagedObjectContext)
+    {
+        context.delete(object)
+        
+        do {
+            try context.save()
+        } catch {
+            // handle error
+        }
+    }
+    
+    static func addObject(objectToAdd: LinkedSupplements,from context: NSManagedObjectContext) {
+        let newItem = SkippedSupplements(context: context)
+        
+        newItem.id = UUID()
+        newItem.created_on = Date.now
+        newItem.expires = Date.now.endOfDay
+        
+        newItem.linkedsupplements = objectToAdd
+        newItem.supplements = objectToAdd.supplements
+
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    static func containsSupplement(object: Supplements,from context: NSManagedObjectContext) -> Bool {
+        let request: NSFetchRequest<SkippedSupplements> = SkippedSupplements.fetchRequest()
+        request.predicate = NSPredicate(format: "supplements != nil", object)
+        //request.predicate = NSPredicate(format: "supplements == %@", object)
+        
+        do {
+            let count = try context.count(for: request)
+            return count > 0
+        } catch {
+            print("Error checking if object exists in entity store: \(error)")
+            return false
+        }
+    }
+}
+
 extension TodoSupplements {
     static func removeObject(object: TodoSupplements,from context: NSManagedObjectContext)
     {
