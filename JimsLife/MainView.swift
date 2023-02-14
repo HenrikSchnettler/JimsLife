@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Dispatch
 
 enum Tabs: String{
     case home = "appname"
@@ -98,6 +99,18 @@ struct MainView: View {
         }
     }
     
+    private func scheduleTaskForStartOfNextDay() {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        let nextDate = Date.now.startOfNextDay
+        let timeDifference = nextDate.timeIntervalSinceNow
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeDifference) {
+            //supplement stores should be synced at the beginning of every day
+            manageSupplementStores()
+        }
+    }
+    
     init() {
         
     }
@@ -167,7 +180,7 @@ struct MainView: View {
         }
         .onAppear(){
             //called on app start
-            
+            scheduleTaskForStartOfNextDay()
         }
         .sheet(isPresented: $showComposeMessageView, content: {
             NavigationView{
