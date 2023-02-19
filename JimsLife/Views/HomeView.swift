@@ -210,6 +210,7 @@ struct HomeView_Item_Row: View {
                             print("Test")
                         }
                     ForEach(todoSupplementItems) { item in
+                        
                         HomeView_Item(context: viewContext, supplement: item.supplements!)
                     }
                     NavigationLink(destination: SettingsView()) {

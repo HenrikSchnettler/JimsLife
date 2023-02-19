@@ -9,8 +9,8 @@
     </entity>
     <entity name="LinkedSupplements" representedClassName="LinkedSupplements" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="period_days" optional="YES" attributeType="Integer 64" minValueString="1" maxValueString="365" defaultValueString="1" usesScalarValueType="YES"/>
-        <attribute name="quantity_per_period" optional="YES" attributeType="Integer 64" minValueString="1" maxValueString="20" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="period_days" attributeType="Integer 64" minValueString="1" maxValueString="365" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="quantity_per_period" attributeType="Integer 64" minValueString="1" maxValueString="20" defaultValueString="1" usesScalarValueType="YES"/>
         <relationship name="donesupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoneSupplements" inverseName="linkedsupplements" inverseEntity="DoneSupplements"/>
         <relationship name="skippedsupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SkippedSupplements" inverseName="linkedsupplements" inverseEntity="SkippedSupplements"/>
         <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="linkedsupplements" inverseEntity="Supplements"/>

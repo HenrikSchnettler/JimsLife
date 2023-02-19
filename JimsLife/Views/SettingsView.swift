@@ -29,7 +29,7 @@ struct SettingsView: View {
         animation: .easeIn)
     private var doneSupplementItems: FetchedResults<DoneSupplements>
     
-    //all supplements are fetched
+    //all supplements are fetched which currently arent linked to the user
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Supplements.name, ascending: true)],
         predicate: NSPredicate(format: "linkedsupplements == nil"),
@@ -42,6 +42,8 @@ struct SettingsView: View {
     
     @State var period_days: String = ""
     @State var quantity_per_period: String = ""
+    @State var activeLinkedSupplementItem = LinkedSupplements()
+    @State var activeUnlinkedSupplement = Supplements()
     
     @StateObject var errorHandlerObj = ErrorHandler()
      
@@ -65,33 +67,20 @@ struct SettingsView: View {
                                     Text(item.supplements?.name ?? "")
                                     Spacer()
                                     Button(action: {
-                                        showDeleteSupplementConfirm = true
+                                        self.showDeleteSupplementConfirm = true
+                                        self.activeLinkedSupplementItem = item
                                     }) {
                                         Image(systemName: "minus.circle.fill")
                                             .foregroundColor(.red)
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                     .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
-                                    .confirmationDialog("Are you sure?",
-                                         isPresented: $showDeleteSupplementConfirm) {
-                                         Button("Deactivate supplement?", role: .destructive) {
-                                             let (success, errorMessage) = LinkedSupplements.removeObject(object: item, from: viewContext)
-                                             
-                                             if success {
-                                                 // The supplement was successfully removed
-                                             } else {
-                                                 // The supplement couldnt be removed
-                                                 errorHandlerObj.selectError(ErrorCase: ErrorHandler.Error.removeSupplementValidation)
-                                             }
-                                             showDeleteSupplementConfirm = false
-                                         }
-                                    }
-
                                 }
                             }
                         }
                         Section(header: Text("more possible supplements:")){
                             ForEach(allSupplementsItems) { item in
+                                
                                 HStack{
                                     Circle()
                                         .fill(Color.ContentOverAccent)
@@ -105,9 +94,10 @@ struct SettingsView: View {
                                     Text(item.name ?? "")
                                     Spacer()
                                     Button(action: {
-                                        showAddSupplementAlert = true
-                                        period_days = ""
-                                        quantity_per_period = ""
+                                        self.showAddSupplementAlert = true
+                                        self.period_days = ""
+                                        self.quantity_per_period = ""
+                                        self.activeUnlinkedSupplement = item
                                     })
                                     {
                                         Image(systemName: "plus.circle.fill")
@@ -115,37 +105,51 @@ struct SettingsView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                     .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
-                                    .alert("add supplement", isPresented: $showAddSupplementAlert, actions: {
-                                        TextField("period lenght (in days)", text: $period_days)
-                                            .keyboardType(.numberPad)
-
-                                        
-                                        TextField("quantity", text: $quantity_per_period)
-                                            .keyboardType(.numberPad)
-
-                                                
-                                        Button("add supplement", action: {
-                                            showAddSupplementAlert = false
-                                            let (success, errorMessage) = LinkedSupplements.addObject(objectToAdd: item, period_days: Int64(period_days) ?? 1, quantity_per_period: Int64(quantity_per_period) ?? 1, from: viewContext)
-                                            
-                                            if success {
-                                                // The supplement was successfully added
-                                            } else {
-                                                // The supplement couldnt be added
-                                                errorHandlerObj.selectError(ErrorCase: ErrorHandler.Error.linkSupplementValidation)
-                                            }
-                                        })
-                                                                                
-                                        Button("cancel", role: .cancel, action: {
-                                            showAddSupplementAlert = false
-                                        })
-                                    }, message: {
-                                        Text("please enter the period lenght and quantity of supplements you want to take per period")
-                                    })
                                 }
                             }
                         }
                     }
+                    .confirmationDialog("Are you sure?",
+                                        isPresented: self.$showDeleteSupplementConfirm) {
+                         Button("Deactivate supplement?", role: .destructive) {
+                             let (success, errorMessage) = LinkedSupplements.removeObject(object: activeLinkedSupplementItem, from: viewContext)
+                             
+                             if success {
+                                 // The supplement was successfully removed
+                             } else {
+                                 // The supplement couldnt be removed
+                                 errorHandlerObj.selectError(ErrorCase: ErrorHandler.Error.removeSupplementValidation)
+                             }
+                             showDeleteSupplementConfirm = false
+                         }
+                    }
+                    .alert("add supplement", isPresented: self.$showAddSupplementAlert, actions: {
+                        TextField("period lenght (in days)", text: self.$period_days)
+                            .keyboardType(.numberPad)
+
+                                            
+                        TextField("quantity", text: self.$quantity_per_period)
+                            .keyboardType(.numberPad)
+
+                                                    
+                        Button("add supplement", action: {
+                            let (success, errorMessage) = LinkedSupplements.addObject(objectToAdd: activeUnlinkedSupplement, period_days: Int64(period_days) ?? 1, quantity_per_period: Int64(quantity_per_period) ?? 1, from: viewContext)
+                                                
+                                    if success {
+                                        // The supplement was successfully added
+                                    } else {
+                                                    
+                                        // The supplement couldnt be added
+                                        errorHandlerObj.selectError(ErrorCase: ErrorHandler.Error.linkSupplementValidation)
+                                    }
+                                })
+                                                                                    
+                                Button("cancel", role: .cancel, action: {
+                                    showAddSupplementAlert = false
+                                })
+                            }, message: {
+                                Text("please enter the period lenght and quantity of supplements you want to take per period")
+                        })
                 }
             }
             Spacer()

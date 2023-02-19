@@ -43,7 +43,7 @@ extension DoneSupplements {
     
     static func containsSupplement(object: Supplements,from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<DoneSupplements> = DoneSupplements.fetchRequest()
-        request.predicate = NSPredicate(format: "supplements != nil", object)
+        request.predicate = NSPredicate(format: "supplements == %@", object)
         //request.predicate = NSPredicate(format: "supplements == %@", object)
         
         do {
@@ -97,7 +97,7 @@ extension SkippedSupplements {
     
     static func containsSupplement(object: Supplements,from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<SkippedSupplements> = SkippedSupplements.fetchRequest()
-        request.predicate = NSPredicate(format: "supplements != nil", object)
+        request.predicate = NSPredicate(format: "supplements == %@", object)
         //request.predicate = NSPredicate(format: "supplements == %@", object)
         
         do {
@@ -146,7 +146,7 @@ extension TodoSupplements {
     
     static func containsSupplement(object: Supplements, from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<TodoSupplements> = TodoSupplements.fetchRequest()
-        request.predicate = NSPredicate(format: "supplements != nil", object)
+        request.predicate = NSPredicate(format: "supplements == %@", object)
         //request.predicate = NSPredicate(format: "supplements == %@", object)
         
         do {
@@ -180,14 +180,21 @@ extension LinkedSupplements {
         newItem.period_days = period_days
         newItem.quantity_per_period = quantity_per_period
         
-        newItem.supplements = objectToAdd
-
+        do {
+            try newItem.validateForInsert()
+            newItem.supplements = objectToAdd
+        } catch {
+            print("Error validating insert: \(error)")
+            context.delete(newItem)
+            return (success: false, errorMessage: error.localizedDescription)
+        }
+        
         do {
             try newItem.validateForInsert()
             try context.save()
             return (success: true, errorMessage: nil)
         } catch {
-            print("Error validating insert: \(error)")
+            print("Error while inserting: \(error)")
             context.delete(newItem)
             return (success: false, errorMessage: error.localizedDescription)
         }
@@ -195,7 +202,7 @@ extension LinkedSupplements {
     
     static func containsSupplement(object: Supplements,from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<LinkedSupplements> = LinkedSupplements.fetchRequest()
-        request.predicate = NSPredicate(format: "supplements != nil", object)
+        request.predicate = NSPredicate(format: "supplements == %@", object)
         //request.predicate = NSPredicate(format: "supplements == %@", object)
         
         do {
@@ -232,8 +239,7 @@ extension Supplements {
     
     static func recordExists(supplementId: String, from context: NSManagedObjectContext) -> Bool {
         let request: NSFetchRequest<Supplements> = Supplements.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Supplements.name, ascending: true)]
-        request.includesSubentities = true
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Supplements.id, ascending: true)]
         request.predicate = NSPredicate(format: "id == %@", supplementId as CVarArg)
         
         do {

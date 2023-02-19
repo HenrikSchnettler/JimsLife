@@ -33,7 +33,7 @@ struct MainView: View {
     
     //Todo supplements are fetched
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.quantity_left, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.id, ascending: true)],
         animation: .easeIn)
     private var todoSupplementItems: FetchedResults<TodoSupplements>
     
@@ -81,6 +81,7 @@ struct MainView: View {
           }
         //todo supplements which are expired are removed from the store
         for item in todoSupplementItems{
+            
             if(item.expires! <= Date.now)
             {
                 TodoSupplements.removeObject(object: item, from: viewContext)
@@ -105,6 +106,7 @@ struct MainView: View {
         
         //loop over linkedSupplements to check if there is an object of it in todoSupplements or doneSupplements or skippedsupplements
         for item in linkedSupplementItems{
+            
             if(!TodoSupplements.containsSupplement(object: item.supplements!, from: viewContext) && !DoneSupplements.containsSupplement(object: item.supplements!, from: viewContext) &&
                !SkippedSupplements.containsSupplement(object: item.supplements!, from: viewContext))
             {
