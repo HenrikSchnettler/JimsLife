@@ -165,14 +165,22 @@ struct HomeView_Item_Row: View {
     
     //Todo supplements are fetched
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.quantity_left, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \TodoSupplements.quantity_left, ascending: false)],
         animation: .easeIn)
     private var todoSupplementItems: FetchedResults<TodoSupplements>
     
-    //Done supplements are fetched
-    @FetchRequest(fetchRequest: DoneSupplements.fetchAllDoneSupplements)
-    private var doneSupplementItems: FetchedResults<DoneSupplements>
+    //Skipped supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \SkippedSupplements.supplements?.name, ascending: true)],
+        animation: .easeIn)
+    private var skippedSupplementItems: FetchedResults<SkippedSupplements>
     
+    //Done supplements are fetched
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \DoneSupplements.supplements?.name, ascending: true)],
+        animation: .easeIn)
+    private var doneSupplementItems: FetchedResults<DoneSupplements>
+        
     var body: some View {
         VStack(alignment: .leading){
             
@@ -191,20 +199,36 @@ struct HomeView_Item_Row: View {
                             }
                         )
                         .contextMenu{
-                            Text("consumed supplements")
-                                .foregroundColor(.red)
-                                .font(.headline)
-                            Divider()
-                            HStack{
-                                ForEach(doneSupplementItems) { item in
-                                    Button(role: .destructive){
-                                        TodoSupplements.addObject(objectToAdd: item.linkedsupplements!, from: viewContext)
-                                        DoneSupplements.removeObject(object: item, from: viewContext)
-                                    }label: {
-                                        Label(item.supplements?.name ?? "", systemImage: "minus.circle")
+                            VStack{
+                                Section(){
+                                    Text("consumed supplements")
+                                        .foregroundColor(.green)
+                                        .font(.headline)
+                                    ForEach(doneSupplementItems) { item in
+                                        Button(role: .destructive){
+                                            TodoSupplements.addObject(objectToAdd: item.linkedsupplements!, from: viewContext)
+                                            DoneSupplements.removeObject(object: item, from: viewContext)
+                                        }label: {
+                                            Label(item.supplements?.name ?? "", systemImage: "minus.circle")
+                                        }
+                                    }
+                                }
+                                Divider()
+                                Section(){
+                                    Text("skipped supplements")
+                                        .foregroundColor(.red)
+                                        .font(.headline)
+                                    ForEach(skippedSupplementItems) { item in
+                                        Button(role: .destructive){
+                                            TodoSupplements.addObject(objectToAdd: item.linkedsupplements!, from: viewContext)
+                                            SkippedSupplements.removeObject(object: item, from: viewContext)
+                                        }label: {
+                                            Label(item.supplements?.name ?? "", systemImage: "minus.circle")
+                                        }
                                     }
                                 }
                             }
+                            
                         }
                         .onLongPressGesture {
                             print("Test")
