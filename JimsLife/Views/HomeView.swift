@@ -235,7 +235,7 @@ struct HomeView_Item_Row: View {
                         }
                     ForEach(todoSupplementItems) { item in
                         
-                        HomeView_Item(context: viewContext, supplement: item.supplements!)
+                        HomeView_Item(context: viewContext, todosupplement: item, supplement: item.supplements!)
                     }
                     NavigationLink(destination: SettingsView()) {
                         Label("add", systemImage: "plus")
@@ -251,48 +251,75 @@ struct HomeView_Item_Row: View {
 }
 
 struct HomeView_Item: View {
-    var context: NSManagedObjectContext
-    var supplement: Supplements
+    let context: NSManagedObjectContext
+    let todosupplement: TodoSupplements
+    let supplement: Supplements
 
     var body: some View {
-        
-        Capsule()
-            .fill(Color.themeAccent)
-            .frame(minWidth: 125, maxWidth: 200, minHeight: 50, maxHeight: 50)
-            .overlay(
-                VStack(alignment: .leading){
-                    HStack(){
-                        Circle()
-                            .fill(Color.ContentOverAccent)
-                            .frame(minWidth: 25, maxWidth: 40, minHeight: 25, maxHeight: 40)
-                            .overlay(
-                                Text(supplement.name!.prefix(1))
-                                    .foregroundColor(Color.InvertedContentOverAccent )
-                                    .frame(width: 40, height: 40)
+        ZStack{
+            Capsule()
+                .fill(Color.themeAccent)
+                .frame(minWidth: 152, maxWidth: 400, minHeight: 50, maxHeight: 50)
+                .overlay(
+                    VStack(){
+                        HStack(){
+                            Circle()
+                                .fill(Color.ContentOverAccent)
+                                .frame(minWidth: 25, maxWidth: 40, minHeight: 50, maxHeight: 50)
+                                .overlay(
+                                    Text(supplement.name!.prefix(2).uppercased())
+                                        .foregroundColor(Color.InvertedContentOverAccent )
+                                        .frame(width: 40, height: 40)
                                     
-                            )
-                        Text(supplement.name!).bold().foregroundColor(Color.ContentOverAccent)
+                                )
+                                .position(x:25,y:25)
+                            Text(supplement.name!).bold().foregroundColor(Color.ContentOverAccent)
+                                .position(x:10,y:25)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                        }
                     }
-                }
-            )
-            .contextMenu{
-                Button{
+                )
+                .padding(.vertical,10)
+            Circle()
+                .fill(Color.themeSecondary)
+                .overlay(
+                    Text(String(todosupplement.quantity_left))
+                        .foregroundColor(Color.ContentOverAccent )
+                        .frame(width: 40, height: 40)
+                    
+                )
+                .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
+                .offset(x: 60, y: -20)
+        }
+        .contextMenu{
+            Button{
+                //check if supplement is completly done or quantity left has to be decreased
+                if(todosupplement.quantity_left - 1 == 0)
+                {
+                    //quantity left is set to zero
+                    todosupplement.setQuantityLeft(quantityLeft: 0)
                     //add Supplement to todays done supplements
                     DoneSupplements.addObject(objectToAdd: supplement.linkedsupplements!, from: context)
                     //remove the supplement from the todoSupplement Store
-                    TodoSupplements.removeObject(object: supplement.todosupplements!, from: context)
-                }label: {
-                    Label("supplement taken", systemImage: "checkmark.circle")
+                    TodoSupplements.removeObject(object: todosupplement, from: context)
                 }
-                Button(role: .destructive){
-                    //add supplements to skipped supplements
-                    SkippedSupplements.addObject(objectToAdd: supplement.linkedsupplements!, from: context)
-                    //only remove the supplement from todays todo store because it´s skipped today
-                    TodoSupplements.removeObject(object: supplement.todosupplements!, from: context)
-                }label: {
-                    Label("skip", systemImage: "minus.circle")
+                else{
+                    //quantity left is set to zero
+                    todosupplement.setQuantityLeft(quantityLeft: todosupplement.quantity_left  - 1)
                 }
+            }label: {
+                Label("supplement taken", systemImage: "checkmark.circle")
             }
+            Button(role: .destructive){
+                //add supplements to skipped supplements
+                SkippedSupplements.addObject(objectToAdd: supplement.linkedsupplements!, from: context)
+                //only remove the supplement from todays todo store because it´s skipped today
+                TodoSupplements.removeObject(object: supplement.todosupplements!, from: context)
+            }label: {
+                Label("skip", systemImage: "minus.circle")
+            }
+        }
     }
 
 }

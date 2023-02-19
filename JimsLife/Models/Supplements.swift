@@ -157,6 +157,16 @@ extension TodoSupplements {
             return false
         }
     }
+    
+    func setQuantityLeft(quantityLeft: Int64){
+        self.quantity_left = quantityLeft
+        
+        do {
+            try self.managedObjectContext?.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
 }
 
 extension LinkedSupplements {
