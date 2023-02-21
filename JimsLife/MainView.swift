@@ -238,7 +238,7 @@ struct MainView: View {
                             
                             List {
                                 Section(header: Text("overview")){
-                                    NavigationLink(destination: MySupplements().onDisappear(){
+                                    NavigationLink(destination: MySupplementsView().onDisappear(){
                                         //if home view is shown the supplement stores should be synchronized
                                         manageSupplementStores()
                                     })

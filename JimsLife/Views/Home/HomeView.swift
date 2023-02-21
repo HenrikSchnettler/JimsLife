@@ -87,7 +87,7 @@ struct StatsView: View {
        
             VStack{
                 HStack{
-                    NavigationLink(destination: MySupplements())
+                    NavigationLink(destination: MySupplementsView())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
@@ -101,7 +101,7 @@ struct StatsView: View {
                             .padding(.horizontal,10)
                     }
                     
-                    NavigationLink(destination: MySupplements())
+                    NavigationLink(destination: MySupplementsView())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
@@ -119,7 +119,7 @@ struct StatsView: View {
                 }
                 .padding()
                 HStack{
-                    NavigationLink(destination: MySupplements())
+                    NavigationLink(destination: MySupplementsView())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
@@ -133,7 +133,7 @@ struct StatsView: View {
                             .padding(.horizontal,10)
                     }
                     
-                    NavigationLink(destination: MySupplements())
+                    NavigationLink(destination: MySupplementsView())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
@@ -237,7 +237,7 @@ struct HomeView_Item_Row: View {
                         
                         HomeView_Item(context: viewContext, todosupplement: item, supplement: item.supplements!)
                     }
-                    NavigationLink(destination: MySupplements()) {
+                    NavigationLink(destination: MySupplementsView()) {
                         Label("add", systemImage: "plus")
                     }
                 }
@@ -254,6 +254,8 @@ struct HomeView_Item: View {
     let context: NSManagedObjectContext
     let todosupplement: TodoSupplements
     let supplement: Supplements
+    
+    @State private var activeSupplement: Supplements?
 
     var body: some View {
         ZStack{
@@ -292,6 +294,19 @@ struct HomeView_Item: View {
                 )
                 .frame(minWidth: 25, maxWidth: 25, minHeight: 25, maxHeight: 25)
                 .offset(x: 65, y: -17)
+        }
+        .onTapGesture {
+            //the binding variable is set to the clicked item which automatically triggers the sheet
+            activeSupplement = supplement
+        }
+        .sheet(item: $activeSupplement, onDismiss: {
+            activeSupplement = nil
+        }) { item in
+            
+            SupplementInfoView(context: context, supplement: item)
+            .onTapGesture {
+                activeSupplement = nil
+            }
         }
         .contextMenu{
             Button{
