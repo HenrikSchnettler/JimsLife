@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B398C472870F031001693BA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B398C462870F031001693BA /* SettingsView.swift */; };
+		2B398C472870F031001693BA /* MySupplementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B398C462870F031001693BA /* MySupplementsView.swift */; };
 		2B398C8028710080001693BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B398C7F28710080001693BA /* GoogleService-Info.plist */; };
 		2B43B633299921BE002EB657 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B43B632299921BE002EB657 /* View.swift */; };
 		2B43B63929992AED002EB657 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B43B63829992AED002EB657 /* ErrorHandler.swift */; };
 		2B5C0190262B002300942C48 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5C018F262B002300942C48 /* ColorExtension.swift */; };
+		2B5CDF3D29A28D1E00ADF4CD /* SupplementInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CDF3C29A28D1E00ADF4CD /* SupplementInfoView.swift */; };
 		2B679906265BDE5300E660A5 /* Supplements.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679904265BDE5300E660A5 /* Supplements.xcdatamodeld */; };
 		2B679909265BE3BC00E660A5 /* Config.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B679907265BE3BC00E660A5 /* Config.xcdatamodeld */; };
 		2B73B3DC26262602009FC899 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73B3DB26262602009FC899 /* UITabBarController.swift */; };
@@ -51,11 +52,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B398C462870F031001693BA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2B398C462870F031001693BA /* MySupplementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySupplementsView.swift; sourceTree = "<group>"; };
 		2B398C7F28710080001693BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B43B632299921BE002EB657 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		2B43B63829992AED002EB657 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		2B5C018F262B002300942C48 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		2B5CDF3C29A28D1E00ADF4CD /* SupplementInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementInfoView.swift; sourceTree = "<group>"; };
 		2B679905265BDE5300E660A5 /* Supplements.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Supplements.xcdatamodel; sourceTree = "<group>"; };
 		2B679908265BE3BC00E660A5 /* Config.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Config.xcdatamodel; sourceTree = "<group>"; };
 		2B73B3DB26262602009FC899 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,31 @@
 				2B5C018F262B002300942C48 /* ColorExtension.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		2B5CDF3729A28B0800ADF4CD /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2BAA6F71261E3A0B00D42310 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2B5CDF3829A28B1D00ADF4CD /* Progression */ = {
+			isa = PBXGroup;
+			children = (
+				2BAA6F79261E3E5E00D42310 /* ProgressionView.swift */,
+			);
+			path = Progression;
+			sourceTree = "<group>";
+		};
+		2B5CDF3929A28B3500ADF4CD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2B398C462870F031001693BA /* MySupplementsView.swift */,
+				2B5CDF3C29A28D1E00ADF4CD /* SupplementInfoView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		2B88A0FE262B3A5E003B2658 /* Models */ = {
@@ -229,9 +256,9 @@
 		2BAA6F6D261E395500D42310 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2BAA6F71261E3A0B00D42310 /* HomeView.swift */,
-				2BAA6F79261E3E5E00D42310 /* ProgressionView.swift */,
-				2B398C462870F031001693BA /* SettingsView.swift */,
+				2B5CDF3929A28B3500ADF4CD /* Settings */,
+				2B5CDF3829A28B1D00ADF4CD /* Progression */,
+				2B5CDF3729A28B0800ADF4CD /* Home */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -389,8 +416,9 @@
 				2B8EEA472985589300BCC858 /* Supplements.swift in Sources */,
 				2B5C0190262B002300942C48 /* ColorExtension.swift in Sources */,
 				2B73B3DC26262602009FC899 /* UITabBarController.swift in Sources */,
+				2B5CDF3D29A28D1E00ADF4CD /* SupplementInfoView.swift in Sources */,
 				2B679906265BDE5300E660A5 /* Supplements.xcdatamodeld in Sources */,
-				2B398C472870F031001693BA /* SettingsView.swift in Sources */,
+				2B398C472870F031001693BA /* MySupplementsView.swift in Sources */,
 				2BF83E7E2971CD5F00D84F95 /* Persistence.swift in Sources */,
 				2BAA6F3C261E252F00D42310 /* JimsLifeApp.swift in Sources */,
 				2B8EEA4A2987036000BCC858 /* Date.swift in Sources */,

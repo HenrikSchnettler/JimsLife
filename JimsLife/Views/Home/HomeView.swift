@@ -87,7 +87,7 @@ struct StatsView: View {
        
             VStack{
                 HStack{
-                    NavigationLink(destination: SettingsView())
+                    NavigationLink(destination: MySupplements())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
@@ -101,7 +101,7 @@ struct StatsView: View {
                             .padding(.horizontal,10)
                     }
                     
-                    NavigationLink(destination: SettingsView())
+                    NavigationLink(destination: MySupplements())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
@@ -119,7 +119,7 @@ struct StatsView: View {
                 }
                 .padding()
                 HStack{
-                    NavigationLink(destination: SettingsView())
+                    NavigationLink(destination: MySupplements())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
@@ -133,7 +133,7 @@ struct StatsView: View {
                             .padding(.horizontal,10)
                     }
                     
-                    NavigationLink(destination: SettingsView())
+                    NavigationLink(destination: MySupplements())
                     {
                         Image(systemName: "sleep.circle")
                             .resizable()
@@ -237,7 +237,7 @@ struct HomeView_Item_Row: View {
                         
                         HomeView_Item(context: viewContext, todosupplement: item, supplement: item.supplements!)
                     }
-                    NavigationLink(destination: SettingsView()) {
+                    NavigationLink(destination: MySupplements()) {
                         Label("add", systemImage: "plus")
                     }
                 }
@@ -259,7 +259,7 @@ struct HomeView_Item: View {
         ZStack{
             Capsule()
                 .fill(Color.themeAccent)
-                .frame(minWidth: 152, maxWidth: 400, minHeight: 50, maxHeight: 50)
+                .frame(minWidth: 150, maxWidth: 400, minHeight: 50, maxHeight: 50)
                 .overlay(
                     VStack(){
                         HStack(){
@@ -281,6 +281,7 @@ struct HomeView_Item: View {
                     }
                 )
                 .padding(.vertical,10)
+                .padding(.horizontal,2.5)
             Circle()
                 .fill(Color.themeSecondary)
                 .overlay(
@@ -289,8 +290,8 @@ struct HomeView_Item: View {
                         .frame(width: 40, height: 40)
                     
                 )
-                .frame(minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30)
-                .offset(x: 60, y: -20)
+                .frame(minWidth: 25, maxWidth: 25, minHeight: 25, maxHeight: 25)
+                .offset(x: 65, y: -17)
         }
         .contextMenu{
             Button{

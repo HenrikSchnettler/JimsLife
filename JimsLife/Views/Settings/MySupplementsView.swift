@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct SettingsView: View {
+struct MySupplements: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     //linked supplements are fetched
@@ -158,8 +158,8 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
+struct MySupplementsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        MySupplements()
     }
 }
