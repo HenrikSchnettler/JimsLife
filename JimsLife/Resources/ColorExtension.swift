@@ -10,6 +10,7 @@ extension Color {
     static let themeAccent = Color("AccentColor")
     static let themeBackground = Color("BackgroundColor")
     static let themeForeground = Color("ForegroundColor")
+    static let themeForegroundSecondary = Color("ForegroundColorSecondary")
     static let themeSecondary = Color("SecondaryColor")
     static let themeTertiary = Color("TertiaryColor")
     static let themeTabview = Color("TabviewColor")

@@ -68,7 +68,11 @@ struct MainView: View {
                     if(Supplements.recordExists(supplementId: item.value(forKey: "CD_id") as! String, from: viewContext))
                     {
                         //check if the record in the users private database is up to date or outdated
-                        
+                        if(!Supplements.isSupplementUpToDate(ckRecord: item, supplement: Supplements.getSupplementWithId(withID: item.value(forKey: "CD_id") as! String, context: viewContext)))
+                        {
+                            //supplement record in the users private database must be updated
+                            Supplements.updateObjectWithRecord(record: item, from: viewContext)
+                        }
                     }
                     else{
                         //record is added to coredata and the users private database

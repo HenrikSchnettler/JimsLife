@@ -24,9 +24,11 @@
         <relationship name="supplements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplements" inverseName="skippedsupplements" inverseEntity="Supplements"/>
     </entity>
     <entity name="Supplements" representedClassName="Supplements" syncable="YES" codeGenerationType="class">
+        <attribute name="cons" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" preserveAfterDeletion="YES"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="pros" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <relationship name="donesupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoneSupplements" inverseName="supplements" inverseEntity="DoneSupplements"/>
         <relationship name="linkedsupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="LinkedSupplements" inverseName="supplements" inverseEntity="LinkedSupplements"/>
         <relationship name="skippedsupplements" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SkippedSupplements" inverseName="supplements" inverseEntity="SkippedSupplements"/>

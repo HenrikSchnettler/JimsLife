@@ -234,7 +234,6 @@ struct HomeView_Item_Row: View {
                             print("Test")
                         }
                     ForEach(todoSupplementItems) { item in
-                        
                         HomeView_Item(context: viewContext, todosupplement: item, supplement: item.supplements!)
                     }
                     NavigationLink(destination: MySupplementsView()) {

@@ -262,6 +262,38 @@ extension Supplements {
         }
     }
     
+    static func getSupplementWithId(withID id: String, context: NSManagedObjectContext) -> Supplements {
+        let request: NSFetchRequest<Supplements> = Supplements.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        do {
+            let result = try context.fetch(request)
+            return result[0]
+        } catch {
+            print("Error checking if object exists: \(error)")
+            return Supplements()
+        }
+    }
+    
+    static func isSupplementUpToDate(ckRecord: CKRecord, supplement: Supplements) -> Bool {
+        // Get all the attributes of the `Supplements` entity
+        let attributes = supplement.entity.attributesByName.keys
+        
+        // Check if the values of each attribute in the `CKRecord` match the corresponding attribute value in the `Supplements` object
+        for attribute in attributes {
+            if(attribute != "id")
+            {
+                guard let ckRecordValue = ckRecord["CD_"+attribute] as? NSObject else { return false }
+                guard let supplementValue = supplement.value(forKey: attribute) as? NSObject else { return false }
+                
+                if !ckRecordValue.isEqual(supplementValue) {
+                    return false
+                }
+            }
+        }
+        
+        return true
+    }
+    
     static func addObject(objectToAdd: Supplements,from context: NSManagedObjectContext) {
         let newItem = Supplements(context: context)
         newItem.id = objectToAdd.id
@@ -302,6 +334,37 @@ extension Supplements {
                             } else {
                                 managedObject.setValue(value, forKey: newKey)
                             }
+            default:
+              break
+          }
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    static func updateObjectWithRecord(record: CKRecord,from context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "Supplements", in: context)!
+        let supplement = Supplements.getSupplementWithId(withID: record.value(forKey: "CD_id") as! String, context: context)
+
+        // Map the properties from the CKRecord to the managed object
+        for key in record.allKeys() {
+            let value = record[key]
+            // Remove the "CD_" prefix from the key
+            let newKey = key.replacingOccurrences(of: "CD_", with: "")
+            
+          switch value {
+            case let value as CKRecordValue:
+              if(newKey != "id")
+              {
+                  supplement.setValue(value, forKey: newKey)
+              }
             default:
               break
           }
