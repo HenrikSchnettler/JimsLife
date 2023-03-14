@@ -62,7 +62,7 @@ struct SupplementInfoView: View {
                             .padding()
                             HStack{
                                 VStack{
-                                    ForEach(supplement.pros ?? [], id: \.self) {itemString in
+                                    ForEach(supplement.pros?.components(separatedBy: ",") ?? [], id: \.self) {itemString in
                                         HStack{
                                             Image(systemName: "plus.circle")
                                                 .foregroundColor(Color.green)
@@ -73,7 +73,7 @@ struct SupplementInfoView: View {
                                 }
                                 Divider()
                                 VStack{
-                                    ForEach(supplement.cons ?? [], id: \.self) {itemString in
+                                    ForEach(supplement.cons?.components(separatedBy: ",") ?? [], id: \.self) {itemString in
                                         HStack{
                                             Image(systemName: "minus.circle")
                                                 .foregroundColor(Color.red)

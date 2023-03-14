@@ -304,7 +304,7 @@ struct HomeView_Item: View {
             
             SupplementInfoView(context: context, supplement: item)
             .onTapGesture {
-                activeSupplement = nil
+                //activeSupplement = nil
             }
         }
         .contextMenu{
